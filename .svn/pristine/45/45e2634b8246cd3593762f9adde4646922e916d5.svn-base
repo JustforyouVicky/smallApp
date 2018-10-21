@@ -1,0 +1,31 @@
+Page({
+  data: {
+    userInfo: {},
+  },
+  onLoad(options) {
+    //获取用户信息
+    wx.getStorage({
+      key: 'userInfo',
+      success: res=>{
+        this.setData({
+          userInfo:res.data
+        })
+      },
+      fail:()=>{ },     
+    })
+  },
+  login(){
+    wx.navigateTo({
+      url:'../login/login'
+    });
+  },
+  unbind(){
+    wx.removeStorage({
+      key: 'uname',
+    })
+    wx.switchTab({
+      url: '../index/index'
+    }) 
+  },
+  onShareAppMessage(){}
+})

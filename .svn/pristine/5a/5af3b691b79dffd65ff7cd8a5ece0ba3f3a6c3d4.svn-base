@@ -1,0 +1,94 @@
+const app=getApp();
+Page({
+  data: {
+    showModel:false,
+    clickImg:'',
+    shareTempFilePath:'',
+    actionSheetHidden: true,
+    photo_album_id:null,
+    PhotoPath:[] ,
+    idx:null,
+  },
+  onLoad(options){
+    this.setData({photo_album_id:options.photo_album_id});
+    var uphone=app.globalData.uphone;
+    if(uphone&&this.data.photo_album_id){
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {  
+          token1:uphone,  
+          token2:this.data.photo_album_id,   
+          type:'GetPhotoPath'
+        },
+        method:'GET',
+        header:{'content-type':'application/json'}, 
+        success:res=>{
+          var res=JSON.parse(res.data).PhotoPath;
+          this.setData({PhotoPath:res});
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          })
+        }
+      });
+    }
+  },
+  listenerButton() {
+    this.setData({actionSheetHidden:!this.data.actionSheetHidden});
+   },
+  listenerActionSheet() {
+    this.setData({actionSheetHidden:!this.data.actionSheetHidden});
+  },
+  //点击放大照片
+  pDetail(e){
+    this.setData({
+      showModel:!this.data.showModel,
+      clickImg:e.currentTarget.dataset.img,
+      idx:e.currentTarget.dataset.idx
+    });
+  },
+  closeModel(){
+    this.setData({
+      showModel:!this.data.showModel
+    })
+  },
+  saveImg(){  
+    wx.downloadFile({  
+      url:this.data.clickImg,  
+      success:res=>{  
+        wx.saveImageToPhotosAlbum({  
+          filePath: res.tempFilePath,  
+          success: res=> {  
+            wx.showToast({
+              title:'保存成功',
+              duration:2000,
+              success:()=>{
+                this.setData({actionSheetHidden:true});
+              }
+            })
+
+          },  
+          fail:()=>{  
+            wx.showModal({
+              content:'保存图片失败，请重试！',
+              showCancel:false,
+            })
+          }  
+        })  
+      }
+    })  
+      
+  },
+  //取消
+  cancel(){
+    this.setData({
+      actionSheetHidden:true
+    })
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+})

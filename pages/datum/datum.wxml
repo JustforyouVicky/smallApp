@@ -1,0 +1,89 @@
+<view class="container-body">
+  <view class="datum-list">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>孩子姓名</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.children_name}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>性别</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.children_sex}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="middle-datum">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>身份证号码</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.children_idnum}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>出生日期</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.children_birthday}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>民族</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.national}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>学校班级</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.school_class}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="middle-datum">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>家长姓名</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.patriarch}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>家长昵称</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.appellation}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>家长电话</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text>{{Students.patriarch_tel}}</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>备用电话</view>
+        <view wx:if="{{Students!==undefined}}">
+          <text wx:if="{{!isStandbyPhone}}" bindtap="phone">{{Students.patriarch_standby_id}}</text>
+          <text wx:else bindtap="phone">请输入</text>          
+          <image src='https://small.aisuoedu.com/mini/img/user/6.png'/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="addr">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view class="lf">家庭住址</view>
+        <view class="rf" wx:if="{{Students!==undefined}}">
+          <text>{{Students.address}}</text>
+        </view>
+      </view>
+    </view>
+   
+  </view>
+
+
+</view>

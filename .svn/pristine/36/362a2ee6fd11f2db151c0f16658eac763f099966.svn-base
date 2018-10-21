@@ -1,0 +1,20 @@
+<view class="container-body">
+    <view class="video" wx:if="{{isVideo||isImg}}">
+      <video wx:if="{{isVideo}}" src="https://small.aisuoedu.com/mini/video/aisuo.mp4" 
+        page-gesture="true" 
+        objectFit="cover"
+        poster="https://small.aisuoedu.com/mini/img/expression/14.png"
+        ></video>
+      <image wx:elif="{{isImg}}" src="https://small.aisuoedu.com/mini/img/expression/14.png"/>
+    </view>
+    <view class="detail">
+      <view class="detail-item">
+        <view class="sub-title">手机投影仪</view>
+        <view class="content">小学生简单有趣的科学小实验,小学生简单有趣的科学小实验,小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。</view>
+      </view>
+      <view class="detail-item">
+        <view class="sub-title">课程介绍</view>
+        <view class="content">小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。</view>
+      </view>
+    </view>
+    </view>

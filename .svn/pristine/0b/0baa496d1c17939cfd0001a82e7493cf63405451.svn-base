@@ -1,0 +1,97 @@
+Page({
+  data: {
+    upwd:'',
+    cpwd:'',
+    isFocus:false,
+    uphone:''
+  },
+  onLoad(options) {
+    this.setData({uphone:options.uphone});
+  },
+  upwdInput(e){
+    this.setData({upwd:e.detail.value});
+  },
+  cpwdInput(e){
+    this.setData({cpwd:e.detail.value});
+  },
+  upwdBlur(){
+    var pwdReg=/^[0-9A-Za-z]{4,12}$/;
+    if(!pwdReg.test(this.data.upwd)){
+      wx.showModal({content:'密码必须4-12位,包含数字或字母！'});
+    }
+  },
+  cpwdBlur(){
+    if(!(this.data.upwd==this.data.cpwd&&this.upwd!="")){
+      wx.showModal({
+        content:'两次密码不一致，请重新输入！',
+        showCancel:false,
+        confirmText:'重新输入',
+        success:res=>{
+          this.setData({
+            isFocus:true,
+            upwd:'',
+            cpwd:''
+          });
+        }
+      });
+    }
+  },
+  update(){
+    if(this.data.upwd===this.data.cpwd&&this.data.upwd!==''){
+      wx.showModal({
+        content:'确定要修改密码吗？',
+        confirmColor:'#333',
+        cancelColor:'#adadad',
+        success:res=>{
+          if(res.confirm){
+            wx.showLoading({title:'提交中...'});
+            var UpdatePassword={
+              password:this.data.upwd,
+              user_id:this.data.uphone,
+              type:'ModifyPassword'
+            }
+            wx.request({
+              url: 'https://small.aisuoedu.com/api/WeChatHome',
+              method: 'POST', 
+              data:JSON.stringify(UpdatePassword),
+              success: res=>{
+                wx.hideLoading();
+                if(res.data=='{"results":"修改成功"}'){
+                  wx.showToast({
+                    title:'密码修改成功',
+                    duration:3000,
+                    success:res=>{
+                      wx.switchTab({
+                        url: '../userCenter/userCenter'
+                      });
+                    }
+                  });
+                }else{
+                  wx.showToast({
+                    title:'密码修改失败',
+                    icon:'none',
+                    duration:3000
+                  });
+                }
+              },
+              fail:()=> {
+                wx.hideLoading();
+                wx.showModal({
+                  content:'网络故障，请检查！',
+                  showCancel:false
+                });
+              }
+            });
+          }
+        }
+      });
+    }else{
+      wx.showModal({
+        content:'密码不能为空,且必须4-12位,包含数字或字母',
+        showCancel:false
+      });
+    }
+
+  },
+  onShareAppMessage() {}
+});

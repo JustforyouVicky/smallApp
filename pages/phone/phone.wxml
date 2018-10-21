@@ -1,0 +1,9 @@
+<view class="container-body">
+  <view class="input">
+    <input value="{{phone}}" bindblur="phoneBlur"  bindinput ="phoneInput" type="text" placeholder="请输入备用电话方便我们联系您"/>
+  </view>
+
+  <view class="btn">
+    <button type="warn" size="default" bindtap="sumitBtn">提交</button>
+  </view>
+</view>

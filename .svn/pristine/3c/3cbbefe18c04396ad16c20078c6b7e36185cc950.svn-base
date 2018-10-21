@@ -1,0 +1,156 @@
+<view class="container-body">
+  <!-- 标识 -->
+  <view class="flag">
+    <text>102</text>
+    <text>202</text>
+    <text>302</text>
+    <text>402</text>
+    <text>502</text>
+    <text>602</text>
+    <text>702</text>
+  </view>
+  <!-- 课表 -->
+  <view class="table">
+  <view class="tr">
+    <view class="th" bindtap="activate">
+      <view wx:if="{{!isClick}}">请假</view>
+      <view wx:else>取消</view>
+    </view>
+    <view class="th">
+      <view>周一</view>
+    </view>
+    <view class="th">
+      <!-- <view>15</view> -->
+      <view>周二</view>
+    </view>
+    <view class="th">
+      <!-- <view>16</view> -->
+      <view>周三</view>
+    </view>
+    <view class="th">
+      <!-- <view>17</view> -->
+      <view>周四</view>
+    </view>
+    <view class="th">
+      <!-- <view>18</view> -->
+      <view>周五</view>
+    </view>
+    <view class="th">
+      <!-- <view>19</view> -->
+      <view>周六</view>
+    </view>
+    <view class="th">
+      <!-- <view>20</view> -->
+      <view>周日</view>
+    </view>
+  </view>
+  <view class="tr">
+    <view class="td">
+      <view class="time">09:00\n-\n10:30</view>
+    </view>
+    <view class="td blue" bindtap="{{isClick?'leave':''}}" data-leave="0">
+      <view>
+        <view class="finish">完</view>
+      </view>
+      <view>102</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td orange" >
+      <view></view>
+      <view>702</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+  </view>
+  <view class="tr">
+    <view class="td">
+      <view class="time">10:30\n-\n12:30</view>
+    </view>
+    <view class="td"></view>
+    <view class="td yellow">
+      <view>
+        <view class="finish">完</view>
+      </view>
+      <view>202</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+  </view>
+  <view class="tr">
+    <view class="td">
+      <view class="time">14:00\n-\n15:30</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td pink">
+      <view>
+        <view class="finish">完</view>
+      </view>
+      <view>502</view>
+    </view>
+    <view class="td"></view>
+    <view class="td green">
+      <view class="finish">完</view>
+      <view>402</view>
+    </view>
+  </view>
+  <view class="tr">
+    <view class="td">
+      <view class="time">15:30\n-\n17:00</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td red">
+      <view>
+        <view class="finish">完</view>
+      </view>
+      <view>502</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+  </view>
+  <view class="tr">
+    <view class="td">
+      <view class="time">15:30\n-\n17:00</view>
+    </view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td"></view>
+    <view class="td purple">
+      <view>
+        <view></view>
+      </view>
+      <view>602</view>
+    </view>
+    <view class="td"></view>
+  </view>
+
+  </view>
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="img-model">
+      <view class="top">
+        <view class="date">
+            <text>5月5日</text>
+            <text>周四</text>
+            <text>14:30-15:30</text>
+          </view>
+          <view class="reason">请假原因</view>
+          <view class="select">
+            <input type="text" bindchange="leaveReason"/>
+          </view>
+      </view>
+      <view class="bottom" bindtap="submitBtn">提交请假申请</view>
+    </view>
+  </view>
+</view>

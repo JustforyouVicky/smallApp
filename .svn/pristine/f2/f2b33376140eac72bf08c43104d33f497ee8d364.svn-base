@@ -1,0 +1,287 @@
+const app=getApp();
+Page({
+  data: {
+    showModel:false,
+    isClick:false,
+    classNum:null,
+    leaveReason:'',
+    children_id:null,
+    uphone:'',
+    ClassPeriod:[],
+    ClassManage:[],
+    newOne:[],
+    newTwo:[],
+    newThree:[],
+    newFour:[],
+    newFive:[],
+    isClass:false,
+    leaveDate:'',
+    days:[],
+    week:'',
+    period_time:'',
+  },
+  onLoad(options){
+    var now = new Date(); 
+    var nowTime = now.getTime(); 
+    var day = now.getDay();
+    var oneDayTime = 24*60*60*1000; 
+    var MonTime =new Date(nowTime - (day-1)*oneDayTime);
+    var TuesTime=new Date(nowTime + (2-day)*oneDayTime);
+    var WedTime=new Date(nowTime + (3-day)*oneDayTime);
+    var ThurTime=new Date(nowTime + (4-day)*oneDayTime);
+    var FriTime=new Date(nowTime + (5-day)*oneDayTime);
+    var SatTime=new Date(nowTime + (6-day)*oneDayTime);
+    var SunTime=new Date(nowTime + (7-day)*oneDayTime); 
+    var Mon=`${MonTime.getMonth()+1}.${MonTime.getDate()}`;
+    var Tues=`${TuesTime.getMonth()+1}.${TuesTime.getDate()}`;
+    var Wed=`${WedTime.getMonth()+1}.${WedTime.getDate()}`;
+    var Thur=`${ThurTime.getMonth()+1}.${ThurTime.getDate()}`;
+    var Fri=`${FriTime.getMonth()+1}.${FriTime.getDate()}`;
+    var Sat=`${SatTime.getMonth()+1}.${SatTime.getDate()}`;
+    var Sun=`${SunTime.getMonth()+1}.${SunTime.getDate()}`;
+    var days=[];
+    days.push(Mon,Tues,Wed,Thur,Fri,Sat,Sun);
+    this.setData({
+      days:days,
+      uphone:app.globalData.uphone,
+      children_id:options.children_id
+    });
+    wx.showLoading({title:'加载中...'});
+    if(this.data.uphone&&this.data.children_id!==null){
+      wx.request({ /*获取时间段*/
+          url: 'https://small.aisuoedu.com/api/WeChatHome',
+          data: {    
+            token:this.data.uphone,
+            type:'GetClassPeriod'
+          },
+          method: 'GET',
+          header: {'content-type':'application/json'}, 
+          success:res=>{
+            var res=JSON.parse(res.data).ClassPeriod;
+            this.setData({ClassPeriod:res});
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            });
+          }
+      }); 
+      wx.request({ /*获取学生课表*/
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token1:this.data.uphone,
+          token2:this.data.children_id,   
+          type:'GetClassManage'
+        },
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          var res=JSON.parse(res.data).ClassManage;
+          if(res!==[]){
+            var one=res[0],two=res[1],three=res[2],four=res[3],five=res[4];
+            var newOne={};
+            for(var key in one){
+              newOne[key]=[];
+              newOne[key].length=7;
+              for(var index in one[key]){
+                if(one[key][index]){
+                  var week=Number(one[key][index]['week']);
+                  newOne[key][week]=one[key][index];
+                }
+              }
+            }
+            for(var i=0;i<newOne['09:00~10:30'].length;i++){
+              for(var j=0;j<days.length;j++){
+                if(i==j &&newOne['09:00~10:30'][i]!==undefined){
+                  newOne['09:00~10:30'][i]['day']=days[j];
+                }
+              }
+            }
+            var newTwo={};
+            for(var key in two){
+              newTwo[key]=[];
+              newTwo[key].length=7;
+              for(var index in two[key]){
+                if(two[key][index]){
+                  var week=Number(two[key][index]['week']);
+                  newTwo[key][week]=two[key][index];
+                }
+              }
+            }
+            for(var i=0;i<newTwo['10:30~12:00'].length;i++){
+              for(var j=0;j<days.length;j++){
+                if(i==j &&newTwo['10:30~12:00'][i]!==undefined){
+                  newTwo['10:30~12:00'][i]['day']=days[j];
+                }
+              }
+            }
+            var newThree={};
+            for(var key in three){
+              newThree[key]=[];
+              newThree[key].length=7;
+              for(var index in three[key]){
+                if(three[key][index]){
+                  var week=Number(three[key][index]['week']);
+                  newThree[key][week]=three[key][index];
+                }
+              }
+            }
+            for(var i=0;i<newThree['14:00~15:30'].length;i++){
+              for(var j=0;j<days.length;j++){
+                if(i==j &&newThree['14:00~15:30'][i]!==undefined){
+                  newThree['14:00~15:30'][i]['day']=days[j];
+                }
+              }
+            }
+            var newFour={};
+            for(var key in four){
+              newFour[key]=[];
+              newFour[key].length=7;
+              for(var index in four[key]){
+                if(four[key][index]){
+                  var week=Number(four[key][index]['week']);
+                  newFour[key][week]=four[key][index];
+                }
+              }
+            }
+            for(var i=0;i<newFour['16:00~17:30'].length;i++){
+              for(var j=0;j<days.length;j++){
+                if(i==j &&newFour['16:00~17:30'][i]!==undefined){
+                  newFour['16:00~17:30'][i]['day']=days[j];
+                }
+              }
+            }
+            var newFive={};
+            for(var key in five){
+              newFive[key]=[];
+              newFive[key].length=7;
+              for(var index in five[key]){
+                if(four[key][index]){
+                  var week=Number(five[key][index]['week']);
+                  newFive[key][week]=five[key][index];
+                }
+              }
+            }
+            for(var i=0;i<newFive['18:00~19:30'].length;i++){
+              for(var j=0;j<days.length;j++){
+                if(i==j &&newFive['18:00~19:30'][i]!==undefined){
+                  newFive['18:00~19:30'][i]['day']=days[j];
+                }
+              }
+            }     
+            this.setData({
+              newOne:newOne,
+              newTwo:newTwo,
+              newThree:newThree,
+              newFour:newFour,
+              newFive:newFive
+            });
+          }  
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });     
+    }
+  },
+  leaveReason(e){
+    this.setData({leaveReason:e.detail.value});
+  },
+  activate(e){
+    this.setData({
+      isClick:!this.data.isClick
+    });
+  },
+  leave(e){
+    var leaveDate=e.currentTarget.dataset.day;
+    var weeks=e.currentTarget.dataset.idx;
+    var week=(weeks==0?'周一':(weeks==1?'周二':(weeks==2?'周三':(weeks==3?'周四':(weeks==4?'周五':(weeks==5?'周六':'周日'))))));
+    var period_time=e.currentTarget.dataset.time
+    this.setData({
+      leaveDate:leaveDate,
+      period_time:period_time,
+      week:week,
+      showModel:!this.data.showModel
+    });
+  },
+  close(){
+    this.setData({
+      showModel:false,
+      isClick:!this.data.isClick
+    });
+  },
+  /*提交请假申请*/
+  submitBtn(){
+    if(this.data.uphone&&this.data.leaveDate&&this.data.leaveReason&&this.data.children_id){
+      wx.request({ 
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token1:this.data.uphone,
+          token2:this.data.leaveDate,
+          token3:this.data.children_id,
+          token4:this.data.leaveReason,
+          type:'InsertCourseLeave'
+        },
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          if(res.data=='{"results":"提交成功"}'){
+            wx.showToast({
+              title:'提交成功!',
+              duration:3000,
+              success:res=>{
+                this.setData({
+                  showModel:!this.data.showModel,
+                  isClick:!this.data.isClick
+                });
+              }
+            });
+          }else if(res.data=='{"results":"已经有请假正在处理中"}'){
+            wx.showModal({
+              content:'您已经有请假正在处理中。',
+              showCancel:false,
+              success:res=>{
+                if(res.confirm){
+                  this.setData({
+                    showModel:!this.data.showModel,
+                    isClick:!this.data.isClick
+                  });
+                }
+              }
+            });
+          }else{
+            wx.showModal({
+              content:'请假失败，请重试！',
+              showCancel:false,
+              success:res=>{
+                if(res.confirm){
+                  this.setData({
+                    showModel:!this.data.showModel,
+                    isClick:!this.data.isClick
+                  });
+                }
+              }
+            });
+          }
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+    }
+    
+   
+  },
+  onPullDownRefresh(){
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+});

@@ -1,0 +1,16 @@
+<view class="container-body">
+  <view class="first" bindtap='premium'>
+    <image src='https://small.aisuoedu.com/mini/img/user/1(14).png'/>
+    <view class='detail'>
+      <view>爱索正式课程</view>
+      <view>一年爱索包</view>
+    </view>
+  </view>
+  <view class="second"  bindtap='premium'>
+    <image src='https://small.aisuoedu.com/mini/img/user/1(15).png'/>
+    <view class='detail'>
+      <view>爱索活动课程</view>
+      <view>爱索活动包</view>
+    </view>
+  </view>
+</view>

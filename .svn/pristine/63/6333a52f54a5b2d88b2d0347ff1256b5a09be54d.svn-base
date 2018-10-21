@@ -1,0 +1,45 @@
+const app=getApp();
+var imgUrl=app.globalData.imgUrl;
+Page({
+  data: {
+    imgList:[],
+    ClassroomUser:[]
+  },
+  onLoad(options){
+    wx.request({ 
+      url: 'https://small.aisuoedu.com/api/WeChatClassroomUser',
+      data: {type:'GetClassroomUser'},
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        wx.hideLoading();
+        console.log(res.data);
+        var res=JSON.parse(res.data).ClassroomUser;
+        console.log(res);
+        var imgList=[];
+        for(var i=0;i<res.length;i++){
+          imgList.push(res[i].header_image);
+        }
+        console.log(imgList);
+        this.setData({
+          ClassroomUser:res,
+          imgList:imgList
+        });
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    });
+  },
+  patriarchDetail(e){
+    var project_id=e.currentTarget.dataset.idx;
+    wx.navigateTo({
+      url: '../patriarchDetail/patriarchDetail?project_id='+project_id
+    })
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

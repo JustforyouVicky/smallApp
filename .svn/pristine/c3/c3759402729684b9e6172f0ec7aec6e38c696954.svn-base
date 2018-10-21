@@ -1,0 +1,52 @@
+
+.container-body{
+  padding-top:30rpx;
+  box-sizing: border-box;
+}
+.datum-list,.middle-dutum{
+  width:100%;
+}
+.datum-list>.datum-items{
+  height:180rpx;
+}
+.datum-list>.datum-items{
+  width:100%;
+  background-color:#fff;
+  align-items: center;
+  flex-direction: column;
+}
+.middle-datum{
+  margin:50rpx 0;
+}
+.middle-datum>.datum-items{
+  height:360rpx;
+  width:100%;
+  background-color:#fff;
+}
+.datum-items .datum-item>view:first-child{
+  width:32%;
+  float: left;
+}
+.datum-items .datum-item>view:last-child{
+  width:68%;
+  float: right;
+  text-align: right;
+}
+.datum-items .datum-item{
+  padding:0 30rpx;
+  box-sizing: border-box;
+  line-height: 90rpx;
+  border-bottom:1px solid #EEE;
+  position: relative;
+}
+.datum-list>.datum-items .datum-item{
+  height:50%;
+}
+.middle-datum>.datum-items .datum-item{
+  height:25%;
+}
+.datum-item image{
+  height:30rpx;
+  width:20rpx;
+  margin-left: 20rpx;
+}

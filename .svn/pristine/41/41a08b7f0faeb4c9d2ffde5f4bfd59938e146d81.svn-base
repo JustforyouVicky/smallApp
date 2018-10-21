@@ -1,0 +1,16 @@
+<view class="container-body">
+  <view class="no-img" wx:if="{{ActivityCourse.length==0}}">
+    <image src="../../img/6.png"/>
+  </view>
+  <view class="act-list" wx:if="{{ActivityCourse.length>0}}">
+    <view data-act="{{item.activity_id}}" bindtap="activityDetail" class="act-item" wx:for="{{ActivityCourse}}" wx:key="{{index}}">
+      <view class="act-img">
+        <image src='{{item.activity_picture_path}}'/>
+      </view>
+      <view class="desc">
+        <view class="img-title">{{item.activity_title}}</view>
+        <view class="img-subtitle">{{item.activity_introduction}}</view>
+      </view>
+    </view>
+  </view>
+</view>

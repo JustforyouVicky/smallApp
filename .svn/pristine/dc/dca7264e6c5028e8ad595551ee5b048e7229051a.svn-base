@@ -1,0 +1,44 @@
+Page({
+  data: {
+    uphone:'',
+    children_name:'',
+    Orders:[],
+    children_id:null
+  },
+  onLoad(options) {
+    this.setData({
+      uphone:options.uphone,
+      children_name:options.children_name,
+      children_id:options.children_id
+    })
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+      data: {
+        token1:this.data.uphone,
+        token2:this.data.children_name,
+        type:'GetOrderInformRefund'
+      },
+      method: 'GET',
+      header: { 'content-type': 'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).Orders;
+        this.setData({
+          Orders:res,
+        })
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    })
+  },
+  premium(e){
+    var order_id=e.currentTarget.dataset.order;
+    wx.navigateTo({
+      url: `../premium/premium?order_id=${order_id}&children_id=${this.data.children_id}`
+    })
+  },
+  onShareAppMessage() {}
+})

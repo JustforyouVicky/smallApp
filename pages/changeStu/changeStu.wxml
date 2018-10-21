@@ -1,0 +1,18 @@
+
+<view class="container">
+  <view class="container-body">
+    <view class="no-img" wx:if="{{Students.length==0}}">
+      <image src="../../img/6.png"/>
+    </view>
+    <view data-child="{{item.children_id}}" data-uname="{{item.children_name}}" bindtap="chooseChild" class="item {{item.children_sex=='男'?'blue':'red'}} clear" wx:if="{{Students.length>0}}" wx:for="{{Students}}" wx:key="{{index}}">
+      <view class="left">
+        <view>
+          <image src="{{item.children_sex=='男'?sexImg[0]:sexImg[1]}}"/>
+        </view>
+      </view>
+      <view class="right">
+        <view>{{item.children_name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

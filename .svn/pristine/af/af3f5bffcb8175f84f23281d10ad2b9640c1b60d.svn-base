@@ -1,0 +1,13 @@
+const app = getApp();
+var imgUrl= app.globalData.imgUrl;
+Page({
+  data: {
+  
+  },
+  onLoad(options) {
+  
+  },
+  onReady() {},
+  onPullDownRefresh() {},
+  onShareAppMessage() {}
+})

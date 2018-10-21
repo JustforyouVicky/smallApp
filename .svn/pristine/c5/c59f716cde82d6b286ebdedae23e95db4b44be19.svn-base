@@ -1,0 +1,22 @@
+<view class="container-body">
+  <view class="act-list">
+    <view class="act-item">
+      <view class="act-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png'/>
+      </view>
+      <view class="desc">
+        <view class="img-title">首次公开课</view>
+        <view class="img-subtitle">成都市5月爱索科学素养启蒙在绿地校区首次开展公开课!</view>
+      </view>
+    </view>
+    <view class="act-item">
+      <view class="act-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png'/>
+      </view>
+      <view class="desc">
+        <view class="img-title">首次公开课</view>
+        <view class="img-subtitle">成都市5月爱索科学素养启蒙在绿地校区首次开展公开课!</view>
+      </view>
+    </view>
+  </view>
+</view>

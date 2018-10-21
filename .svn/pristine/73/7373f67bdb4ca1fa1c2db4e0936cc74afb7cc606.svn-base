@@ -1,0 +1,24 @@
+.container-body{
+  padding:30rpx;
+  box-sizing:border-box;
+}
+.title{
+  font-size:36rpx;
+  color:#000;
+  margin-bottom:30rpx;
+}
+.detail{
+  width:100%;
+}
+.detail-item{
+  width:100%;
+  margin:20rpx auto;
+}
+.detail-item>.text{
+  text-indent: 60rpx;
+}
+.detail-item>image{
+  width:80%;
+  height:400rpx;
+  margin-left:10%;
+}

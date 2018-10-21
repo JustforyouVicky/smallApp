@@ -1,0 +1,55 @@
+
+const app = getApp();
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    userInfo: {},
+  },
+
+  onLoad(options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      })
+    } else if (this.data.canIUse) {
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          // hasUserInfo: true
+        })
+      }
+    } else {
+      wx.getUserInfo({
+        success: res => {
+          console.log(res);
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+  },
+  login(){
+    wx.navigateTo({
+      url:'../login/login'
+    });
+  },
+  unbind(){
+    wx.removeStorage({
+      key: 'uname',
+    })
+    wx.switchTab({
+      url: '../index/index'
+    }) 
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

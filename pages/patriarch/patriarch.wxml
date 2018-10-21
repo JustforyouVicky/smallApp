@@ -1,0 +1,36 @@
+<view class="container-body">
+  <view class="search">
+    <icon type="search" size="16"></icon>
+    <input type="text" bindchange="search" placeholder="搜索你喜欢的..." />
+  </view>
+  <view class="swiper-container">
+    <view class="no-img" wx:if="{{imgList.length==0}}">
+      <image src="../../img/6.png"/>
+    </view>
+    <swiper autoplay='true' interval='5000' wx:if="{{imgList.length>0}}"
+      duration="500" circular='true'>
+      <swiper-item wx:for="{{imgList}}" wx:key="{{index}}">
+        <image src='{{item.header_image}}' data-idx="{{item.project_id}}" bindtap="patriarchDetail" />
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="recomm">
+    <view class="title">
+      <view>
+        <text></text>
+        <text>热门推荐</text>
+      </view>
+    </view>
+    <view class="recomm-list">
+      <view data-idx="{{item.project_id}}" wx:for="{{ClassroomUser}}" wx:key="{{index}}" bindtap="patriarchDetail" class="recomm-item clear">
+        <view class="lf left">
+          <image src="{{item.header_image}}"/>
+        </view>
+        <view class="rf right">
+          <view class="title">{{item.title}}</view>
+          <view class="detail">{{item.introduction}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

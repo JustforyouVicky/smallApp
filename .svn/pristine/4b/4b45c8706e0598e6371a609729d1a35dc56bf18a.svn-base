@@ -1,0 +1,9 @@
+<view class="container-body">
+  <view class="item {{item.is_aisuo==0?'second':'first'}}" bindtap='premium' data-order="{{item.order_id}}" wx:for="{{Orders}}" wx:key="{{index}}">
+    <view class='detail'>
+      <view>{{item.is_aisuo==0?'爱索活动课程':'爱索正式课程'}}</view>
+      <view>{{item.course_package_name}}</view>
+    </view>
+  </view>
+  
+</view>

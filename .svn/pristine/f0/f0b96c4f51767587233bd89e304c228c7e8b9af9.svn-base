@@ -1,0 +1,52 @@
+<view class="container-body">
+  <view class="search">
+    <icon type="search" size="16"></icon>
+    <input type="text" placeholder="搜索你喜欢的..." />
+  </view>
+  <view class="swiper-container">
+    <swiper autoplay='true' interval='5000' 
+      duration="500" circular='true'>
+      <swiper-item wx:for="{{carousel}}" wx:key="{{index}}">
+        <image src='{{item}}' />
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="recomm">
+    <view class="title">
+      <view>
+        <text></text>
+        <text>热门推荐</text>
+      </view>
+    </view>
+    <view class="recomm-list">
+      <view bindtap="patriarchDetail" class="recomm-item clear">
+        <view class="lf left">
+          <image src="https://small.aisuoedu.com/mini/img/expression/16.png"/>
+        </view>
+        <view class="rf right">
+          <view class="title">王者之剑</view>
+          <view class="detail">小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。</view>
+        </view>
+      </view>
+      <view class="recomm-item clear">
+        <view class="lf left">
+          <image src="https://small.aisuoedu.com/mini/img/expression/16.png"/>
+        </view>
+        <view class="rf right">
+          <view class="title">王者之剑</view>
+          <view class="detail">小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。</view>
+        </view>
+      </view>
+      <view class="recomm-item clear">
+        <view class="lf left">
+          <image src="https://small.aisuoedu.com/mini/img/expression/17.png"/>
+        </view>
+        <view class="rf right">
+          <view class="title">王者之剑</view>
+          <view class="detail">小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。小学生简单有趣的科学小实验,让你瞬间搞定熊孩子。</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>

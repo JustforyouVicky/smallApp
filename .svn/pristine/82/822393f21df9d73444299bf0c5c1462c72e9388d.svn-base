@@ -1,0 +1,17 @@
+<view class="container-body">
+  <!-- 顶部获取用户头像 -->
+  <view class="top-bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/1.png'/>
+    <view class="user-pic">
+      <view>
+        <image class="userinfo-avatar" src='https://small.aisuoedu.com/mini/img/index/11.png' background-size="cover"/>
+      </view>
+      <text class="userinfo-nickname">未绑定</text>
+    </view>
+  </view>
+  <view class="bottom-btn">
+    <view>
+      <button type="primary" size="default" bindtap='login'>绑定账号</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,96 @@
+// pages/changeClass/changeClass.js
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    uphone:'',
+    children_name:'',
+    Orders:[],
+    children_id:null
+  },
+
+  onLoad(options) {
+    console.log(options);
+    this.setData({
+      uphone:options.uphone,
+      children_name:options.children_name,
+      children_id:options.children_id
+    })
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+      data: {
+        token1:this.data.uphone,
+        token2:this.data.children_name,
+        type:'GetOrderInformRefund'
+      },
+      method: 'GET',
+      header: { 'content-type': 'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).Orders;
+        console.log(res);
+        this.setData({
+          Orders:res,
+        })
+        console.log(this.data.Orders);
+
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    })
+  },
+  premium(e){
+    console.log(e.currentTarget.dataset.order);
+    var order_id=e.currentTarget.dataset.order;
+    wx.navigateTo({
+      url: `../premium/premium?order_id=${order_id}&children_id=${this.data.children_id}`
+  
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

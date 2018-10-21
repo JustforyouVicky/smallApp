@@ -1,0 +1,53 @@
+<view class="container-body">
+  <view class="photo-list">
+    <view class="photo-item" bindtap="classPhoto">
+      <view class="photo-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png' />
+      </view>
+      <view class="desc">
+        <view class="img-title">公开课活动照片</view>
+        <view>
+          <text></text>
+        </view>
+        <view class="img-date">2018-02-03</view>
+      </view>
+    </view>
+    <view class="photo-item">
+      <view class="photo-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png' />
+      </view>
+      <view class="desc">
+        <view class="img-title">公开课活动照片</view>
+        <view>
+          <text></text>
+        </view>
+        <view class="img-date">2018-02-03</view>
+      </view>
+    </view>
+    <view class="photo-item">
+      <view class="photo-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png' />
+      </view>
+      <view class="desc">
+        <view class="img-title">公开课活动照片</view>
+        <view>
+          <text></text>
+        </view>
+        <view class="img-date">2018-02-03</view>
+      </view>
+    </view>
+    <view class="photo-item">
+      <view class="photo-img">
+        <image src='https://small.aisuoedu.com/mini/img/index/act-1.png' />
+      </view>
+      <view class="desc">
+        <view class="img-title">公开课活动照片</view>
+        <view>
+          <text></text>
+        </view>
+        <view class="img-date">2018-02-03</view>
+      </view>
+    </view>
+
+  </view>
+</view>

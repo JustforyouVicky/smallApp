@@ -1,0 +1,30 @@
+
+.container-body >.login{
+  width:100%;
+  margin-top:60rpx;
+}
+.container-body >.login>view{
+  width:100%;
+  height:100rpx;
+}
+.container-body >.login>view:not(:last-child){
+  background-color: #fff;
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+}
+.container-body >.login>view:last-child{
+  margin-top:60rpx;
+}
+.container-body >.login>view>input{
+  height:100%;
+  padding-left:36rpx;
+  box-sizing: border-box;
+  font-size:30rpx;
+}
+.container-body >.login>view>button{
+  height:80%;
+  width:90%;
+  line-height: 80rpx;
+  letter-spacing: 0.2rem;
+  background-color:#FD3B3B;
+}

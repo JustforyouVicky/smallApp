@@ -1,0 +1,15 @@
+<view class="container-body">
+  <view class="update">
+    <view class="label">新密码</view>
+    <view>
+      <input value="{{upwd}}" type="password" focus="true"  bindinput="upwdInput" bindblur="upwdBlur" placeholder="4-12位，包含数字或字母" minlength="4" maxlength="12" />
+    </view>
+    <view class="label">确认密码</view>
+    <view>
+      <input value="{{cpwd}}" type="password" focus="{{isFocus}}" bindinput="cpwdInput" bindblur="cpwdBlur" placeholder="4-12位，包含数字或字母"/>
+    </view>
+    <view>
+      <button type="warn" size="default" bindtap='update'>确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<view class="container-body">
+  <view class="pay-list" bindtap="record" wx:if="Orders.length>0" data-order='{{item.order_id}}'  wx:for="{{Orders}}" wx:key="{{index}}">
+    <image src="https://small.aisuoedu.com/mini/img/user/1(9).png"/>
+    <view class="pay-item" bindtap="record">
+      <view class="clear">
+        <view class="lf left">收据单号\t:\t<text>{{item.receipt_num}}</text></view>
+        <view class="rf right">
+          <image class="icon-img" src="{{item.payment_way==0?payWayImg[3]:(item.payment_way==1?payWayImg[2]:(item.payment_way==2?payWayImg[0]:payWayImg[1]))}}"/>
+          <text>{{item.total}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">缴费项目号\t:\t<text>{{item.course_package_name}}</text></view>
+        <view class="rf right red">{{item.charge_categories==0?'全款':(item.charge_categories==1?'定金':'补缴')}}</view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">海星姓名\t:\t<text>{{item.children_name}}</text></view>
+        <view class="rf right">收款人\t:\t<text>{{item.toll_collector}}</text></view>
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,190 @@
+const app=getApp();
+Page({
+  data: {
+    uphone:'',
+    num:59,
+    msg:'',
+    upwd:'',
+    iv:'',
+    encryptedData:''
+  },
+  onLoad(options){
+    this.setData({
+      uphone:options.uphone,
+      upwd:options.upwd
+    });
+   this.sendVerificationCode(); 
+  },
+  sendMsg(){
+   this.sendVerificationCode();
+  },
+  msg(e){
+    this.setData({msg:e.detail.value});
+  },
+  /**发送验证码 */
+  sendVerificationCode(){
+    this.setData({num:59});
+    var timer=setInterval(()=>{
+      var n=this.data.num;
+      n--;
+      this.setData({num:n})
+      if(n==0){
+        clearInterval(timer);
+        timer=null;
+      }
+    },1000);
+    wx.request({
+      url: 'https://small.aisuoedu.com/Background/C_terminal/WeChatVerificationCode.aspx',
+      data: {
+        user_id:this.data.uphone,
+        type:'0'
+      },
+      method: 'GET', 
+      header: {'content-type':'application/json'}, 
+      success: res=>{
+        var res=res.data.slice(0,6);
+        if(res=='已发送验证码'){
+          wx.showToast({
+            title:'验证码发送成功,请稍等!',
+            icon:'none',
+            duration:5000
+          });
+        }else{
+          wx.showModal({
+            content:'网络故障，请检查！',
+            showCancel:false,
+            success:res=>{
+              if(res.confirm){
+                wx.navigateTo({
+                  url: '../login/login'
+                }); 
+              }
+            }
+          });
+        }
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false,
+          success:res=>{
+            if(res.confirm){
+              wx.navigateTo({
+                url: '../login/login'
+              }); 
+            }
+          }
+        });
+      }
+   });
+  },
+  submitBtn(){ /**提交验证码 */
+    wx.request({
+      url: 'https://small.aisuoedu.com/Background/C_terminal/WeChatVerificationCode.aspx',
+      data: {
+        user_id:this.data.uphone,
+        Code:this.data.msg,
+        type:'1'
+      },
+      method: 'GET', 
+      header: {'content-type':'application/json'}, 
+      success: res=>{
+        console.log(res);
+        var res=res.data.slice(0,5);
+        console.log(res);
+        if(res=='验证码正确'){
+          wx.showLoading({title:'提交中...'});
+          wx.login({
+            success:res => {
+              console.log(res.code);
+              if(res.code){
+                wx.request({
+                  url: 'https://small.aisuoedu.com/api/WeChat',
+                  data: {
+                    token2:this.data.uphone,
+                    token3:this.data.upwd,
+                    token1:res.code,
+                    type:'BindingUser'
+                  },
+                  method: 'GET', 
+                  header: {'content-type':'application/json'}, 
+                  success: res=>{
+                    console.log(res);
+                    var res=JSON.parse(res.data).results;
+                    console.log(res);
+                    wx.hideLoading();
+                    if(res=="绑定完成"){
+                      wx.hideLoading();
+                      wx.setStorageSync('uname',this.data.uphone);
+                      wx.showToast({
+                        title:'绑定账号成功!',
+                        duration:3000,
+                        success:()=>{
+                          wx.switchTab({
+                            url:'../userCenter/userCenter'
+                          });
+                        }
+                      });
+                    }else{
+                      wx.hideLoading();
+                      wx.showModal({
+                        content:'绑定账号失败,请重试!',
+                        showCancel:false,
+                        success:res=>{
+                          if(res.confirm){
+                            wx.navigateTo({
+                              url: '../login/login'
+                            }); 
+                          }
+                        }
+                      });
+                    }
+                  },
+                  fail:()=>{
+                    wx.showModal({
+                      content:'网络故障，请检查1！',
+                      showCancel:false,
+                      success:res=>{
+                        if(res.confirm){
+                          wx.navigateTo({
+                            url: '../login/login'
+                          }); 
+                        }
+                      }
+                    });
+                  }
+                });
+              }
+            },
+            fail:()=>{
+              wx.showModal({
+                content:'网络故障，请检查2！',
+                showCancel:false,
+                success:res=>{
+                  if(res.confirm){
+                    wx.navigateTo({
+                      url: '../login/login'
+                    }); 
+                  }
+                }  
+              });
+            }
+          });
+        }else{
+          wx.showModal({
+            content:'网络故障，请检查3！',
+            showCancel:false
+          });
+        }
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障，请检查4！',
+          showCancel:false
+        });
+      }
+    });
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

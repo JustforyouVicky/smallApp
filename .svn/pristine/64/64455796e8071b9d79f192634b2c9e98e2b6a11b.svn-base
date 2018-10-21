@@ -1,0 +1,73 @@
+const app=getApp();
+Page({
+  data: {
+    uphone:'',
+    num:59,
+    msg:''
+  },
+  onLoad(options){
+    this.setData({uphone:app.globalData.uphone});
+    console.log(this.data.uphone);
+    this.sendVerificationCode(); 
+  },
+  sendMsg(){
+    this.sendVerificationCode();
+  },
+  msg(e){
+    this.setData({msg:e.detail.value});
+    console.log(this.data.msg);
+  },
+  sendVerificationCode(){
+    this.setData({num:59});
+    var timer=setInterval(()=>{
+      var n=this.data.num;
+      n--;
+      this.setData({num:n})
+      if(n==0){
+        clearInterval(timer);
+        timer=null;
+      }
+    },1000);
+    wx.request({
+      url: 'https://small.aisuoedu.com/Background/C_terminal/WeChatVerificationCode.aspx',
+      data: {
+        user_id:this.data.uphone,
+        type:'0'
+      },
+      method: 'GET', 
+      header: {'content-type': 'application/json'}, 
+      success: res=>{
+        console.log(res);
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        });
+      }
+   });
+  },
+  submitBtn(){
+    console.log(this.data.msg);
+    wx.request({
+      url: 'https://small.aisuoedu.com/Background/C_terminal/WeChatVerificationCode.aspx',
+      data: {
+        Code:this.data.msg,
+        type:'1'
+      },
+      method: 'GET', 
+      header: {'content-type':'application/json'}, 
+      success: res=>{
+        console.log(res);
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        });
+      }
+    });
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

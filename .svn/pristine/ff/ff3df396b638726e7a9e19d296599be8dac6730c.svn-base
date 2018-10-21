@@ -1,0 +1,18 @@
+
+Page({
+  data: {
+
+  },
+  onLoad(options) {},
+  onReady() {
+
+  },
+  classPhoto() {
+    wx.navigateTo({
+      url: '../photoDetail/photoDetail'
+    })
+  },
+  onPullDownRefresh(){},
+  onReachBottom(){},
+  onShareAppMessage() {}
+})

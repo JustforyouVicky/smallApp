@@ -1,0 +1,265 @@
+const app = getApp();
+Page({
+  data: {
+    uphone:'',
+    children_id:null,
+    bind:'',
+    surplus:[], //剩余课时
+    total_class:null,//总课时
+    num_class:null, //已上课时
+    rest_class:null, //剩余课时
+    CoursesSpecialty:[],//特色课    
+    PicturePath:[],//轮播    
+    ActivityCourse:[],//活动报名
+    ClassPhotoalbum:[],//班级相册
+    TeacherIntroduce:[],//老师介绍
+  },
+  onLoad(options){
+    app.getChildrenId();
+    var uphone=app.globalData.uphone;
+    this.setData({uphone:uphone});
+    wx.getStorage({
+      key: 'bind',
+      success:res=>{
+        this.showCaroursel();
+        this.showFeatureClass();
+        if(res.data=='该用户已绑定'){
+          wx.getStorage({
+            key: 'uname',
+            success: res=>{
+              this.setData({uphone:res.data});
+              this.showTeacher(); 
+              this.showActivity();
+              wx.getStorage({
+                key: 'children_info',
+                success: res=>{
+                  this.setData({children_id:res.data.children_id});
+                  if(this.data.children_id!==null){
+                    this.showSurplus(); /*剩余课时*/
+                    this.showClassPhoto(); /*班级相册*/
+                  }
+                },
+                fail:()=> {
+                  if(app.globalData.children_id!==null){
+                    this.setData({children_id:app.globalData.children_id});   
+                    this.showSurplus(); 
+                    this.showClassPhoto();
+                  }else{
+                    app.childrenIdCallback = res => {
+                      if (res != '') {
+                        this.setData({children_id:res.children_id}); 
+                        this.showSurplus(); 
+                        this.showClassPhoto();
+                      } 
+                    }
+                  }                                        
+                }
+              });
+            },
+            fail:()=> {
+              wx.showModal({
+                content:'亲，您还没有绑定账号哟！',
+                confirmText:'去绑定！',
+                cancelText:'没有账号',
+                cancelColor:'#adadad',
+                confirmColor:'#f00',
+                success:res=>{
+                  if(res.confirm){
+                    wx.navigateTo({
+                      url: '../switchAccount/switchAccount'
+                    })
+                  }
+                }
+              });
+            }
+          });
+        }
+      },
+      fail:()=> {
+        wx.navigateTo({
+          url: '../accredit/accredit'
+        })
+      }
+    });
+  },
+  info(){
+    wx.navigateTo({
+      url: '../info/info',
+    });
+  },
+  timetable(){
+    wx.navigateTo({
+      url: '../timetable/timetable?children_id='+this.data.children_id
+    });
+  },
+  classRecord(){
+    wx.navigateTo({
+      url: '../classRecord/classRecord?children_id='+this.data.children_id
+    });
+  },
+  surplus(){
+    wx.navigateTo({
+      url: `../surplus/surplus?children_id=${this.data.children_id}&total_class=${this.data.total_class}&rest_class=${this.data.rest_class}&num_class=${this.data.num_class}`,
+    });
+  },
+  featureClass(e){
+    var courses_specoalty_id=e.currentTarget.dataset.feaid;
+    wx.navigateTo({
+      url: '../featureClass/featureClass?courses_specoalty_id='+courses_specoalty_id,
+    });
+  },
+  activity(){
+    wx.navigateTo({
+      url: '../activity/activity?children_id='+this.data.children_id
+    });
+  },
+  activityDetail(e){
+    var activity_id=e.currentTarget.dataset.act;
+    wx.navigateTo({
+      url: `../activityDetail/activityDetail?activity_id=${activity_id}&children_id=${this.data.children_id}`
+    });
+  },
+  classPhoto(){
+    wx.navigateTo({
+      url: '../classPhoto/classPhoto?children_id='+this.data.children_id
+    });
+  },
+  photoDetail(e) {
+    var photo_album_id=e.currentTarget.dataset.album;
+    wx.navigateTo({
+      url: `../photoDetail/photoDetail?photo_album_id=${photo_album_id}`
+    })
+  },
+  showCaroursel(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {type:'GetPicturePath'},
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).PicturePath ;
+        this.setData({PicturePath:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    });
+  },
+  showFeatureClass(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {type:'GetSpecoaltyCoursesIdPicture'},
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).CoursesSpecialty;
+        this.setData({CoursesSpecialty:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    });
+  },
+  showSurplus(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {
+        token1:this.data.uphone,
+        token2:this.data.children_id,
+        type:'GetRemainingClassTime'
+      },
+      method: 'GET',
+      header: { 'content-type': 'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).class_time;
+        this.setData({
+          surplus:res,
+          total_class:res[0].total_class,
+          num_class:res[0].num_class,
+          rest_class:res[0].rest_class
+        });
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    });
+  },
+  showActivity(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {    
+        token:this.data.uphone,   
+        type:'GetActivityCourse'
+      },
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).ActivityCourse;
+        this.setData({ActivityCourse:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    });
+  },
+  showClassPhoto(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {  
+        token1:this.data.children_id,  
+        token2:this.data.uphone,   
+        type:'GetClassPhotoalbum'
+      },
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).ClassPhotoalbum;
+        this.setData({ClassPhotoalbum:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    });
+  },
+  showTeacher(){
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {    
+        token:this.data.uphone,   
+        type:'GetTeacherIntroduce'
+      },
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).TeacherIntroduce;
+        this.setData({TeacherIntroduce:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        });
+      }
+    }); 
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+    app.getChildrenId();
+  },
+  onShareAppMessage(){}
+});

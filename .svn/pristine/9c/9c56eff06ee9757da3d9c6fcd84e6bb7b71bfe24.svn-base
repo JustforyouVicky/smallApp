@@ -1,0 +1,38 @@
+const app=getApp();
+Page({
+  data: {
+    Message:[]
+  },
+  onLoad(options) {
+    var uphone=app.globalData.uphone;
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {
+        token:uphone,
+        type:'GetMessage'
+      },
+      method: 'GET', 
+      header: {'content-type': 'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).Message;
+        this.setData({Message:res});
+      },
+      fail:()=> {
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        })
+      }
+    })
+  },
+  infoDetail(e){
+    var message_id=e.currentTarget.dataset.idx;
+    wx.navigateTo({
+      url:'../infoDetail/infoDetail?message_id='+message_id
+    })
+  },
+  onPullDownRefresh(){
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+})

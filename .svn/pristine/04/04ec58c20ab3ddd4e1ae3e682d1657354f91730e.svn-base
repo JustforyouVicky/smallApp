@@ -1,0 +1,151 @@
+<view class="container">
+  <view class="container-body">
+    <view class="swiper-container">
+      <swiper wx:if="{{PicturePath.length>0}}"  autoplay='true' interval='3000' 
+        duration="500" circular='true'>
+        <swiper-item  wx:for="{{PicturePath}}" wx:key="{{index}}">
+          <image src='{{item.picture_path}}' />
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='nav-list'>
+      <image src='https://small.aisuoedu.com/mini/img/index/car.png'/>
+      <view class='nav-item'>
+        <view class='nav-btn' style="position: relative;">
+          <image bindtap='info' src='https://small.aisuoedu.com/mini/img/index/1.png'/>
+          <!-- <view style="position: absolute;width:30rpx;height:30rpx;background-color:#f00;border-radius: 50%;top:20rpx;left:110rpx;"></view> -->
+          <view>
+            <text>消息</text>
+          </view> 
+        </view>
+      </view>
+      <view class='nav-item'>
+        <view class='nav-btn'>
+          <image bindtap="timetable" src='https://small.aisuoedu.com/mini/img/index/2.png'/>
+          <view>
+            <text>周课表</text> 
+          </view>
+        </view>
+      </view>
+      <view class='nav-item'>
+        <view class='nav-btn'>
+          <image  src='https://small.aisuoedu.com/mini/img/index/3.png'/>
+          <view>
+            <text>成长记录</text> 
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='expression clear'>
+      <view class='left' bindtap='classRecord' >
+        <image src='https://small.aisuoedu.com/mini/img/index/8.png' />
+      </view>
+       <view class='right'>
+        <view class='surplus' bindtap="surplus" wx:if="{{surplus.length>0}}">
+          <text>{{surplus[0].rest_class}}\n</text>
+          <text>剩余课时</text>
+        </view>
+        <image src='https://small.aisuoedu.com/mini/img/index/10.png' />
+      </view> 
+    </view>
+    <view class="feature">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>特色课程展示</text>
+        </view>
+      </view>
+      <view class="scroll-container">
+        <view class="no-img" style="height:300rpx" wx:if="{{CoursesSpecialty.length==0}}">
+          <image style="height:100%;" src="../../img/6.png"/>
+        </view>
+        <scroll-view scroll-x class="fea-scroll" wx:if="{{CoursesSpecialty.length>0}}">
+          <view  class="fea-item" wx:for="{{CoursesSpecialty}}" data-feaid="{{item.courses_specoalty_id}}" wx:key="{{index}}" bindtap="featureClass">
+            <image src="{{item.courses_picture_path}}"></image>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <view class="activity">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>活动报名</text>
+        </view>
+        <view bindtap="activity">更多>></view>
+      </view>
+      <view class="scroll-container">
+        <view class="no-img"  wx:if="{{ActivityCourse.length==0}}">
+          <image  src="../../img/6.png"/>
+        </view>
+        <scroll-view scroll-x class="act-scroll" wx:if="{{ActivityCourse.length>0}}">
+          <view  class="act-item" bindtap="activityDetail" data-act="{{item.activity_id}}" wx:for="{{ActivityCourse}}" wx:key="{{index}}">
+            <view class="act-img">
+              <image src='{{item.activity_picture_path}}'/>
+            </view>
+            <view class="desc">
+              <view class="img-title">{{item.activity_title}}</view>
+              <view class="img-subtitle">{{item.activity_introduction}}</view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <view class="photo">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>班级相册</text>
+        </view>
+        <view bindtap="classPhoto">更多>></view>
+      </view>
+      <view class="scroll-container">
+        <view class="no-img"  wx:if="{{ClassPhotoalbum.length==0}}">
+          <image  src="../../img/6.png"/>
+        </view>
+        <scroll-view scroll-x class="photo-scroll" wx:if="{{ClassPhotoalbum.length>0}}">
+          <view class="photo-item" bindtap="photoDetail" data-album="{{item.photo_album_id}}"  wx:for="{{ClassPhotoalbum}}" wx:key="{{index}}">
+            <view class="photo-img">
+              <image src="{{item.photo_path_cover}}"></image>
+            </view>
+            <view class="desc">
+              <view class="img-title">{{item.photo_album_name}}</view>
+              <view>
+                <text></text>
+              </view>
+              <view class="img-date">{{item.album_date}}</view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <view class="teacher">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>名师推荐</text>
+        </view>
+      </view>
+      <view class="scroll-container">
+        <view class="no-img" style="height:360rpx" wx:if="{{TeacherIntroduce.length==0}}">
+          <image style="height:100%;"  src="../../img/6.png"/>
+        </view>
+        <scroll-view scroll-x class="teach-scroll" wx:if="{{TeacherIntroduce.length>0}}">
+          <view class="teach-item clear" wx:for="{{TeacherIntroduce}}" wx:key="{{index}}">
+            <view class="left">
+              <view>
+                <image src="{{item.teacher_photo_url}}"></image>
+              </view>
+            </view>
+            <view class="right">
+              <view class="info">
+                <view>{{item.emp_name}}</view>
+                <view>{{item.teacher_introduce}}</view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view>
+  </view>
+</view>

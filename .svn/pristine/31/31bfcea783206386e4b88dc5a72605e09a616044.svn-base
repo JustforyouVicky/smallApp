@@ -1,0 +1,77 @@
+const app=getApp();
+Page({
+  data: {
+    uphone:''
+  },
+  onLoad(options){
+   
+    this.setData({uphone:app.globalData.uphone});
+    console.log(this.data.uphone);
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatVerificationCode',
+      data: {
+        token:'46fp6',
+        type:'ThanVerificatioinCode'
+      },
+      method: 'GET', 
+      header: {'content-type': 'application/json'}, 
+      success: res=>{
+        console.log(res);
+        // var res=JSON.parse(res.data).results;
+        // console.log(res);
+        if(res.data=='{"验证成功"}'){
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChatVerificationCode',
+            data: {
+              token:this.data.uphone,
+              type:'SendVerificationCode'
+            },
+            method: 'GET', 
+            header: {'content-type': 'application/json'}, 
+            success: res=>{
+              console.log(res);
+              // var res=JSON.parse(res.data).results;
+              // console.log(res);
+             
+            },
+            fail: function() {
+              wx.showModal({
+                content:'网络故障，请检查！',
+                showCancel:false
+              })
+            }
+          })
+        }
+       
+      },
+      fail: function() {
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        })
+      }
+    })
+
+   
+
+    // wx.request({ 
+    //   url: 'https://small.aisuoedu.com/CheckCode/CheckCode.aspx',
+    //   method: 'GET',
+    //   header:{
+    //     'content-type': 'application/x-www-form-urlencoded', 
+    //     'cookie':wx.getStorageSync("sessionid")//读取cookie
+    //   }, 
+    //   success:res=>{
+    //     console.log(res);
+    //   },
+    //   fail:()=>{
+    //     wx.showModal({
+    //       content:'网络故障,请检查!',
+    //       showCancel:false,	
+    //     })
+    //   }
+    // });
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

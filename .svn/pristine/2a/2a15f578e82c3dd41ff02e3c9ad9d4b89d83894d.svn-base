@@ -1,0 +1,43 @@
+.container-body{
+  padding:50rpx;
+  box-sizing: border-box;
+}
+.act-list{
+  width:100%;
+}
+.act-item{
+  height:500rpx;
+  width:100%;
+  padding:20rpx;
+  box-sizing: border-box;
+  background-color:#fff;
+  border-radius: 20rpx;
+  box-shadow: 1px 1px 1px 1px  #888;
+  margin-bottom:50rpx;
+}
+.act-item>.act-img{
+  height:75%;
+  width:100%;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+.act-item .desc{
+  height:25%;
+  width:100%;
+  margin-top:20rpx;
+}
+.act-item .desc .img-title{
+  font-weight:bold;
+  font-size:26rpx;
+  text-align: left;
+}
+.act-item>view>.img-subtitle{
+  width:100%;
+  white-space: normal;
+  text-align: left;
+  margin: 10rpx 0;
+  font-size:24rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -1,0 +1,19 @@
+Page({
+
+  data:{
+    num:0,
+    // imgUrl:['https://small.aisuoedu.com/mini/img/user/1(6).png','https://small.aisuoedu.com/mini/img/user/1(7).png']
+  },
+  onLoad(options){
+   
+   
+  },
+  checkImg(){
+    wx.previewImage({  
+      current: this.data.imgUrl, // 当前显示图片的http链接     
+      urls: this.data.imgUrl // 需要预览的图片http链接列表     
+    })   
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

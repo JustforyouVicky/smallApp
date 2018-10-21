@@ -1,0 +1,19 @@
+<view class="container-body" wx:if="{{CoursesSpecialty!==undefined}}">
+  <view class="video">
+    <video src="{{CoursesSpecialty.courses_picture_path}}" 
+      page-gesture="true" 
+      objectFit="cover"
+      poster="{{CoursesSpecialty.courses_picture_path}}"
+      ></video>
+  </view>
+  <view class="detail">
+    <view class="detail-item">
+      <view class="sub-title">{{CoursesSpecialty.courses_heading}}</view>
+      <view class="content">{{CoursesSpecialty.courses_simple_introduce}}</view>
+    </view>
+    <view class="detail-item">
+      <view class="sub-title">课程介绍</view>
+      <view class="content">{{CoursesSpecialty.courses_introduce }}</view>
+    </view>
+  </view>
+</view>

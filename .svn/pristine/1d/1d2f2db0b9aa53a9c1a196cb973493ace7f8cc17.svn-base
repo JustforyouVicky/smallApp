@@ -1,0 +1,72 @@
+
+Page({
+  data: {
+  
+  },
+  onLoad: function (options) {
+  },
+  UserLogin(){
+    wx.login({
+      success: res => {
+        if(res.code){
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChat',
+            data: {token:res.code,type:'IsUser'},
+            method: 'GET', 
+            header: { 'content-type': 'application/json'}, 
+            success: res=>{
+              var res=JSON.parse(res.data);
+              wx.setStorageSync("bind", res.results);
+              wx.switchTab({
+                url: '../index/index',
+                success:res=>{},
+              })
+            },
+            fail: function() {
+              wx.showModal({
+                content:'网络故障,请检查!',
+                showCancel:false,	
+              })
+            }
+          })
+        }
+      }
+    });
+  },
+  getUserInfo(e){
+    console.log(e);
+    wx.setStorage({
+      key: 'userInfo',
+      data: e.detail.userInfo
+    })
+    wx.getSetting({
+      success:res=> {
+        console.log(res.authSetting);
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success:(res)=> {
+              this.UserLogin();
+              console.log(res);
+            },
+            fail:function(){
+              wx.switchTab({
+                url: '../index/index',
+                success: res=>{},
+              })
+            }
+          })
+        }else{
+          this.UserLogin();
+        }
+      }
+    })
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

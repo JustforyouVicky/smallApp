@@ -1,0 +1,247 @@
+const app = getApp();
+var imgUrl= app.globalData.imgUrl;
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    uphone:'',
+    children_name:'',
+    children_id:''
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+      wx.getStorage({
+        key:"uname",
+        success:res=>{
+          this.setData({
+            uphone:res.data
+          })
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+            data: {
+              token:this.data.uphone,
+              type:'SwitchChildrenOnlyOne'
+            },
+            method: 'GET',
+            header: { 'content-type': 'application/json'}, 
+            success:res=>{
+              console.log(res.data);
+              if(res.data!==undefined){
+                var res=JSON.parse(res.data).Students[0];
+                this.setData({
+                  children_id:res.children_id,
+                  children_name:res.children_name
+                })
+              }
+            },
+            fail:()=>{
+              wx.showModal({
+                content:'网络故障,请检查!',
+                showCancel:false,	
+              })
+            }
+          })
+        }
+      });
+    } else if (this.data.canIUse) {
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+      //获取用户信息
+      wx.getStorage({
+        key:"uname",
+        success:res=>{
+          this.setData({
+            uphone:res.data
+          })
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+            data: {
+              token:this.data.uphone,
+              type:'SwitchChildrenOnlyOne'
+            },
+            method: 'GET',
+            header: { 'content-type': 'application/json'}, 
+            success:res=>{
+              if(res.data!==undefined){
+                console.log(res.data);
+                var res=JSON.parse(res.data).Students[0];
+                this.setData({
+                  children_id:res.children_id,
+                  children_name:res.children_name
+                })
+              }
+            },
+            fail:()=>{
+              wx.showModal({
+                content:'网络故障,请检查!',
+                showCancel:false,	
+              })
+            }
+          })
+        }
+      });
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+      wx.getStorage({
+        key:"uname",
+        success:res=>{
+          this.setData({
+            uphone:res.data
+          })
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+            data: {
+              token:this.data.uphone,
+              type:'SwitchChildrenOnlyOne'
+            },
+            method: 'GET',
+            header: { 'content-type': 'application/json'}, 
+            success:res=>{
+              if(res.data!==undefined){
+                console.log(res.data);
+                var res=JSON.parse(res.data).Students[0];
+                this.setData({
+                  children_id:res.children_id,
+                  children_name:res.children_name
+                })
+              }
+            },
+            fail:()=>{
+              wx.showModal({
+                content:'网络故障,请检查!',
+                showCancel:false,	
+              })
+            }
+          })
+        }
+      });
+    }
+  },
+  datum(){
+    wx.navigateTo({
+      url:'../datum/datum?children_id='+this.data.children_id
+    });
+  },
+  change(){
+    wx.navigateTo({
+      url:'../changeStu/changeStu'
+    });
+  },
+  bind(){
+    var uid= wx.getStorage({
+      key:'uname',
+      success:res=>{
+        if(res.data){
+          wx.navigateTo({
+            url:'../bind/bind'
+          });
+        }
+      },
+      fail:()=>{
+        wx.navigateTo({
+          url: '../switchAccount/switchAccount'
+        })
+      }
+    })
+    
+    
+  },
+  recommend(){
+    wx.navigateTo({
+      url:'../recommend/recommend'
+    });
+  },
+  setting(){
+    wx.navigateTo({
+      url:'../setting/setting'
+    });
+  },
+  changeClass(){
+    wx.navigateTo({
+      url:'../changeClass/changeClass'
+    });
+  },
+  payRecord(){
+    wx.navigateTo({
+      url:'../payRecord/payRecord?children_name='+this.data.children_name
+    });
+  },
+  accredit(){
+    wx.navigateTo({
+      url: '../accredit/accredit'
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.startPullDownRefresh();
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

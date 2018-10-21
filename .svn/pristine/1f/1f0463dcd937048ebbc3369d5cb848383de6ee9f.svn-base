@@ -1,0 +1,41 @@
+Page({
+  data: {
+    isVideo:true,
+    isImg:false,
+    ClassroomChildren:{},
+    project_id:null
+  },
+  onLoad(options){
+    var project_id=options.project_id;
+    wx.showLoading({title:'加载中...'});
+    if(project_id){
+      wx.request({ 
+        url: 'https://small.aisuoedu.com/api/WeChatClassroomChildren',
+        data: {
+          token:project_id,
+          type:'GetClassroomChildren'
+        },
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          var res=JSON.parse(res.data).ClassroomChildren[0];
+          this.setData({
+            ClassroomChildren:res
+          });
+        },
+        fail:()=>{
+          wx.hideLoading();
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+    }
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+});

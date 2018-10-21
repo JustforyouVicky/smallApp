@@ -1,0 +1,239 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.98",
+	"appid": "wx6c23056e590f489c",
+	"projectname": "mini-App",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "guide",
+					"pathName": "pages/guide/guide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/userCenter/userCenter",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "datum",
+					"pathName": "pages/datum/datum",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "change",
+					"pathName": "pages/changeStu/changeStu",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "bind",
+					"pathName": "pages/bind/bind",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "login ",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "recommend",
+					"pathName": "pages/recommend/recommend",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "setting",
+					"pathName": "pages/setting/setting",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "class",
+					"pathName": "pages/changeClass/changeClass",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "premium",
+					"pathName": "pages/premium/premium",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pay",
+					"pathName": "pages/payRecord/payRecord",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "update",
+					"pathName": "pages/update/update",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "activity",
+					"pathName": "pages/activity/activity",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "photo",
+					"pathName": "pages/classPhoto/classPhoto",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "timetable",
+					"pathName": "pages/timetable/timetable",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "surplus",
+					"pathName": "pages/surplus/surplus",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "info",
+					"pathName": "pages/info/info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "featureClass",
+					"pathName": "pages/featureClass/featureClass",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "classRecord",
+					"pathName": "pages/classRecord/classRecord",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "classRecord",
+					"pathName": "pages/classRecord/classRecord",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "photoDetail",
+					"pathName": "pages/photoDetail/photoDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "perpetualChage",
+					"pathName": "pages/perpetualChage/perpetualChage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "perpetualChage",
+					"pathName": "pages/perpetualChage/perpetualChage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "record",
+					"pathName": "pages/record/record",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "patriarch",
+					"pathName": "pages/patriarch/patriarch",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "accredit",
+					"pathName": "pages/accredit/accredit",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "patriarchDetail",
+					"pathName": "pages/patriarchDetail/patriarchDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "expression",
+					"pathName": "pages/expression/expression",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "expressionDetail",
+					"pathName": "pages/expressionDetail/expressionDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "switchAccount",
+					"pathName": "pages/switchAccount/switchAccount",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "phone",
+					"pathName": "pages/phone/phone",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "infoDetail",
+					"pathName": "pages/infoDetail/infoDetail",
+					"query": ""
+				}
+			]
+		}
+	}
+}

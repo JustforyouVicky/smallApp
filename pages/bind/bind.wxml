@@ -1,0 +1,19 @@
+<view class="container-body">
+  <view class="top-bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/1.png'/>
+    <view class="user-pic">
+      <view>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
+      </view>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="bottom-btn">
+    <view>
+      <button type="primary" size="default" bindtap='login'>切换账号</button>
+    </view>
+    <view>
+      <button type="primary" size="default" bindtap="unbind">解除绑定</button>
+    </view>
+  </view>
+</view>

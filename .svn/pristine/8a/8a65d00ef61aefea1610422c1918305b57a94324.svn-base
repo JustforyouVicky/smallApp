@@ -1,0 +1,23 @@
+<view class="container-body">
+  <view class="no-img" wx:if="{{Message.length==0}}">
+    <image src="../../img/6.png"/>
+  </view>
+  <view class="info-list"  wx:if="{{Message.length>0}}">
+    <view class="info-item" bindtap="infoDetail" wx:for="{{Message}}" wx:key="{{index}}">
+      <view class="lf left">
+        <view class="sign red"></view>
+        <view class="lf-date">
+          <text>{{item.message_date}}</text>
+        </view>
+      </view>
+      <view class="rf right">
+        <view class="rf-detail">
+          <view class="detail-title">{{item.message_title}}</view>
+          <view class="content">{{item.message_content}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view id="line"></view>
+
+</view>

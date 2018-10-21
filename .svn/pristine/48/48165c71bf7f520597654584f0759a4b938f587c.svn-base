@@ -1,0 +1,13 @@
+<view class="container-body">
+  <view class="login">
+    <view>
+      <input type="text" placeholder="云账号"/>
+    </view>
+    <view>
+      <input type="password" placeholder="密码"/>
+    </view>
+    <view>
+      <button type="primary" size="default" bindtap='login'>确定</button>
+    </view>
+  </view>
+</view>

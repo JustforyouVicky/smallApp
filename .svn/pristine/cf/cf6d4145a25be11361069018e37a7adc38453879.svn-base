@@ -1,0 +1,55 @@
+<view class="container-body">
+  <view class="bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/1(16).png'/>
+  </view>
+  <view class="pre-list">
+    <view class="pre-item clear">
+      <view class="left lf">姓名</view>
+      <view class="right rf">陈学希</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">性别</view>
+      <view class="right rf">男</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">身份证号码</view>
+      <view class="right rf">137245678909023457</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">出生日期</view>
+      <view class="right rf">2012-05-12</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">民族</view>
+      <view class="right rf">汉</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">学校班级</view>
+      <view class="right rf">成都外国语实验小学一年级一班</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">退款账号</view>
+      <view class="right rf">
+        <input type="text" placeholder="请输入退款账号" />
+      </view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">开户银行</view>
+      <view class="right rf">
+        <input type="text" placeholder="请输入开户银行" />
+      </view>
+    </view>
+    <view class="reason">
+      <view>退款原因</view>
+      <!-- <picker>
+        <viwe>123</viwe>
+        <view>12378</view>
+        <view>1234</view>
+      </picker> -->
+      <view></view>
+    </view>
+    <view>
+
+    </view>
+  </view>
+</view>

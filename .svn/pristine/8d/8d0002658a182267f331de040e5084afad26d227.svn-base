@@ -1,0 +1,78 @@
+<!--pages/datum/datum.wxml-->
+<view class="container-body">
+  <view class="datum-list">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>孩子姓名</view>
+        <view>
+          <text>陈学希</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>性别</view>
+        <view>
+          <text>男</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="middle-datum">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>身份证号码</view>
+        <view>
+          <text>513723456781234578</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>出生日期</view>
+        <view>
+          <text>2012-02-08</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view >民族</view>
+        <view>
+          <text>汉</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>学校班级</view>
+        <view>
+          <text>成都外国语学院一年级一班</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="middle-datum">
+    <view class="datum-items">
+      <view class="datum-item clear">
+        <view>家长姓名</view>
+        <view>
+          <text>陈某某</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>家长称呼</view>
+        <view>
+          <text>爸爸</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>家长电话</view>
+        <view>
+          <text>13312314145</text>
+        </view>
+      </view>
+      <view class="datum-item clear">
+        <view>家庭住址</view>
+        <view>
+          <text>成都高新西区天辰路</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

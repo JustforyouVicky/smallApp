@@ -1,0 +1,34 @@
+Page({
+  data: {
+    children_id:null,
+    uphone:'',
+    total_class:null,
+    num_class:null,
+    rest_calss:null
+  },
+
+  onLoad(options){
+  console.log(options); 
+    this.setData({
+      total_class:options.total_class,
+      num_class:options.num_class,
+      rest_calss:options.rest_calss
+    })
+  },
+
+  onReady() {
+  
+  },
+
+  onPullDownRefresh() {
+  
+  },
+
+  onReachBottom() {
+  
+  },
+
+  onShareAppMessage() {
+  
+  }
+})

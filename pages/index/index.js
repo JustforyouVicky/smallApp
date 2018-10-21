@@ -1,0 +1,233 @@
+const app = getApp();
+Page({
+  data: {
+    uphone: '',
+    children_id: null,
+    /*剩余课时*/
+    surplus: [],
+    /*总课时*/
+    total_class:0,
+    /*已上课时*/
+    num_class: 0,
+    /*剩余课时*/
+    rest_class: 0,
+    /*特色课*/
+    CoursesSpecialty: [],
+    /*轮播*/
+    PicturePath: [],
+    /*活动报名*/
+    ActivityCourse: [],
+    /*班级相册*/
+    ClassPhotoalbum: [],
+     /*老师介绍*/
+    TeacherIntroduce: [],
+  },
+  onLoad(options) {
+    app.getChildrenId();
+    this.showIndexInfo();
+  },
+  onReady() {
+    wx.getStorage({
+      key: 'uname',
+      success: res => {
+        this.setData({
+          uphone: res.data
+        });
+      },
+      fail: () => {
+        wx.showModal({
+          content: '亲，您还没有绑定账号哟！',
+          confirmText: '去绑定！',
+          cancelText: '没有账号',
+          cancelColor: '#adadad',
+          confirmColor: '#f00',
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '../switchAccount/switchAccount'
+              })
+            } else if (res.cancel) {
+              wx.setStorageSync('uname', '13413491349');
+              this.onLoad();
+            }
+          }
+        });
+      }
+    });
+    this.onLoad();
+  },
+  onShow(){
+    this.showIndexInfo();
+  },
+  showIndexInfo() {
+    var uphone=wx.getStorageSync('uname');
+    this.setData({
+      uphone: uphone
+    });
+    wx.getStorage({
+      key: 'isUser',
+      success: res => {
+        this.showCaroursel(); /**轮播 */
+        this.showFeatureClass(); /**特色课展示 */
+        wx.getStorage({
+          key: 'uname',
+          success: res => {
+            this.setData({
+              uphone: res.data
+            });
+            this.showTeacher(); /**名师推荐 */
+            this.showActivity(); /**活动展示 */
+            wx.getStorage({
+              key: 'children_info',
+              success: res => {
+                this.setData({
+                  children_id: res.data.children_id
+                });
+                if (this.data.children_id !== null) {
+                  this.showSurplus(); /*剩余课时*/
+                  this.showClassPhoto(); /*班级相册*/
+                }
+              },
+              fail: () => {
+                if (app.globalData.children_id !== null) {
+                  this.setData({
+                    children_id: app.globalData.children_id
+                  });
+                  this.showSurplus(); /*剩余课时*/
+                  this.showClassPhoto(); /*班级相册*/
+                } else {
+                  app.childrenIdCallback = res => {
+                    if (res != '') {
+                      this.setData({
+                        children_id: res.children_id
+                      });
+                      this.showSurplus(); /*班级相册*/
+                      this.showClassPhoto(); /*班级相册*/
+                    }
+                  }
+                }
+              }
+            });
+          }
+        });
+      },
+      fail: () => {
+        wx.navigateTo({
+          url: '../accredit/accredit'
+        })
+      }
+    });
+  },
+  info() {
+    wx.navigateTo({
+      url: '../info/info',
+    });
+  },
+  timetable() {
+    wx.navigateTo({
+      url: '../timetable/timetable?children_id=' + this.data.children_id
+    });
+  },
+  classRecord() {
+    wx.navigateTo({
+      url: '../classRecord/classRecord?children_id=' + this.data.children_id
+    });
+  },
+  surplus() {
+    wx.navigateTo({
+      url: `../surplus/surplus?children_id=${this.data.children_id}&total_class=${this.data.total_class}&rest_class=${this.data.rest_class}&num_class=${this.data.num_class}`,
+    });
+  },
+  featureClass(e) {
+    var courses_specoalty_id = e.currentTarget.dataset.feaid;
+    wx.navigateTo({
+      url: '../featureClass/featureClass?courses_specoalty_id=' + courses_specoalty_id,
+    });
+  },
+  activity() {
+    wx.navigateTo({
+      url: '../activity/activity?children_id=' + this.data.children_id
+    });
+  },
+  activityDetail(e) {
+    var activity_id = e.currentTarget.dataset.act;
+    wx.navigateTo({
+      url: `../activityDetail/activityDetail?activity_id=${activity_id}&children_id=${this.data.children_id}`
+    });
+  },
+  classPhoto() { /*班级相册*/
+    wx.navigateTo({
+      url: '../classPhoto/classPhoto?children_id=' + this.data.children_id
+    });
+  },
+  photoDetail(e) { /**相册详情 */
+    var photo_album_id = e.currentTarget.dataset.album;
+    wx.navigateTo({
+      url: `../photoDetail/photoDetail?photo_album_id=${photo_album_id}`
+    })
+  },
+  showCaroursel() { /**轮播 */
+    app.ajaxGet('WeChatHome',{type: 'GetPicturePath'},data=>{
+      var res = JSON.parse(data).PicturePath;
+      this.setData({
+        PicturePath: res
+      });
+    });
+  },
+  showFeatureClass() { /**特色课展示 */
+    app.ajaxGet('WeChatHome',{type:'GetSpecoaltyCoursesIdPicture'},data=>{
+      var res = JSON.parse(data).CoursesSpecialty;
+        this.setData({
+          CoursesSpecialty: res
+        });
+    });
+  },
+  showSurplus() { /**剩余课时 */
+    app.ajaxGet('WeChatHome',{
+      token1: this.data.uphone,
+      token2: this.data.children_id,
+      type: 'GetRemainingClassTime'
+    },data=>{
+    var res = JSON.parse(data).class_time;
+      this.setData({
+        surplus: res,
+        total_class: res[0].total_class,
+        num_class: res[0].num_class,
+        rest_class: res[0].rest_class
+      });
+    });
+  },
+  showActivity() { /**活动 */
+    app.ajaxGet('WeChatHome',{token: this.data.uphone,type: 'GetActivityCourse'},data=>{
+      var res = JSON.parse(data).ActivityCourse;
+      this.setData({
+        ActivityCourse: res
+      });
+    });
+  },
+  showClassPhoto() { /**班级相册详情 */
+    app.ajaxGet('WeChatHome',{
+      token1: this.data.children_id,
+      token2: this.data.uphone,
+      type: 'GetClassPhotoalbum'
+    },data=>{
+      var res = JSON.parse(data).ClassPhotoalbum;
+      this.setData({
+        ClassPhotoalbum: res
+      });
+    });
+  },
+  showTeacher() { /**名师推荐 */
+    app.ajaxGet('WeChatHome',{token: this.data.uphone,type: 'GetTeacherIntroduce'},data=>{
+      var res = JSON.parse(data).TeacherIntroduce;
+      this.setData({
+        TeacherIntroduce: res
+      });
+    });
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+    app.getChildrenId();
+  },
+  onShareAppMessage() {}
+});

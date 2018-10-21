@@ -1,0 +1,44 @@
+Page({
+  data: {
+    uphone:''
+  },
+  onLoad(options) {
+    wx.getStorage({
+      key: 'uname',
+      success:res=>{
+        this.setData({uphone:res.data});
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatHome',
+          data: {    
+            token:res.data,   
+            type:'GetActivityCourse'
+          },
+          method: 'GET',
+          header: {'content-type':'application/json'}, 
+          success:res=>{
+            var res=JSON.parse(res.data).ActivityCourse;
+            this.setData({
+              ActivityCourse:res
+            })
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }
+        }); 
+      }
+    })
+  },
+  activityDetail(e){
+    var activity_id=e.currentTarget.dataset.act;
+    wx.navigateTo({
+      url: `../activityDetail/activityDetail?activity_id=${activity_id}&uphone=${this.data.uphone}`
+    })
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage() {}
+})

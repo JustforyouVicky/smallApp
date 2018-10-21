@@ -1,0 +1,24 @@
+<view class="container-body">
+  <view class="surplus-list">
+    <image src='https://small.aisuoedu.com/mini/img/index/shengyukeshi.png'/>
+    <view class="title">剩余<text>{{rest_class}}</text>课时</view>
+    <view class="sub-title">已上课时数</view>
+    <view class="no-img" wx:if="{{CourseDetailsAiSuo.length==0}}">
+      <image src="../../img/6.png"/>
+    </view>
+    <view wx:if="{{CourseDetailsAiSuo.length>0}}" wx:for="{{CourseDetailsAiSuo}}" wx:key="{{index}}"  class="surplus-item clear">
+      <view class="lf left">
+        <view></view>
+      </view>
+      <view class="rf right">
+        <view class="clear">
+          <view class="lf">
+            <view>{{item.literacy_point_name}}</view>
+            <text>{{item.class_date}}</text>
+          </view>
+          <view class="rf">2课时</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

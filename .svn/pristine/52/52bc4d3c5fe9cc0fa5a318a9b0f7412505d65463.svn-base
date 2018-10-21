@@ -1,0 +1,19 @@
+<view class="container-body">
+  <view class="no-img" wx:if="{{Message.length==0}}">
+    <image src="../../img/6.png"/>
+  </view>
+  <view class="list">
+    <view class="title">绿地中心5月调研课抽样查询</view>
+    <view class="detail">
+      <view class="detail-item">
+        <view class="text">
+            绿地中心5月调研课抽样查询绿地中心5月调研课抽样查询绿地中心5月调研课抽样查询绿地中心5月调研课抽样查询绿地中心5月调研课抽样查询
+        </view>
+      </view>
+      <view class="detail-item">
+        <image src="../../img/6.png"/>
+      </view>
+    </view>
+  </view>
+  
+</view>

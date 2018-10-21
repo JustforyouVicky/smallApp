@@ -1,0 +1,20 @@
+<view class="container-body">
+  <view class="no-img" wx:if="{{ClassPhotoalbum.length==0}}">
+    <image src="../../img/6.png"/>
+  </view>
+  <view class="photo-list" wx:if="{{ClassPhotoalbum.length>0}}">
+    <view wx:for="{{ClassPhotoalbum}}" wx:key="{{index}}" data-album="{{item.photo_album_id}}" class="photo-item" bindtap="classPhoto">
+      <view class="photo-img">
+        <image src='{{item.photo_path_cover}}' />
+      </view>
+      <view class="desc">
+        <view class="img-title">{{item.photo_album_name}}</view>
+        <view>
+          <text></text>
+        </view>
+        <view class="img-date">{{item.album_date}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>

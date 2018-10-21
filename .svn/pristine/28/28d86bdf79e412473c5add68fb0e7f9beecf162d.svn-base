@@ -1,0 +1,183 @@
+const app = getApp();
+var imgUrl= app.globalData.imgUrl;
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    bind:'',
+    featureClassId:0,
+    banner:[  //轮播图
+      imgUrl+'/index/banner-1.png',
+      imgUrl+'/index/banner-1.png',
+      imgUrl+'/index/banner-1.png'
+    ],
+    featureUrl:[
+      imgUrl+'/index/feature-1.png',
+      imgUrl+'/index/feature-2.png',
+      imgUrl+'/index/feature-1.png',
+      imgUrl+'/index/feature-2.png'
+    ],
+    activityUrl:[
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png'
+    ],
+    classPhotoUrl:[
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png'
+    ],
+    teacherUrl:[
+      imgUrl+'/index/teacher-1.png',
+      imgUrl+'/index/teacher-1.png',
+      imgUrl+'/index/teacher-1.png'
+    ]
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    //加载页面
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+      data: {},
+      method: 'GET', 
+      header: { 'content-type': 'application/json'}, 
+      success:res=>{
+        console.log(res);
+      },
+      fail:()=> {
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        })
+      }
+    })
+
+    //判定用户是否
+    wx.getStorage({
+      key: 'uname',
+      success:res=>{},
+      fail(res) {
+        wx.showModal({
+          content:'亲，您还没有绑定账号哟！',
+          confirmText:'去绑定！',
+          cancelText:'没有账号',
+          cancelColor:'#adadad',
+          confirmColor:'#f00',
+          success:res=>{
+            if(res.confirm){
+              wx.navigateTo({
+                url: '../switchAccount/switchAccount'
+              })
+            }else if(res.cancel){
+              
+            }
+          }
+        })
+      },
+    })
+
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+  
+  },
+  info(){
+    wx.navigateTo({
+      url: '../info/info',
+    })
+  },
+  timetable(){
+    wx.navigateTo({
+      url: '../timetable/timetable'
+    })
+  },
+  
+  classRecord(){
+    wx.navigateTo({
+      url: '../classRecord/classRecord'
+    })
+  },
+  surplus(){
+    wx.navigateTo({
+      url: '../surplus/surplus',
+    })
+  },
+  featureClass(){
+    wx.navigateTo({
+      url: '../featureClass/featureClass?featureClass_id='+this.data.featureClassId,
+    })
+  },
+  //近期活动
+  activity:function(){
+    wx.navigateTo({
+      url: '../activity/activity',
+      success: function(res){
+        
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
+  },
+  classPhoto:function(){
+    wx.navigateTo({
+      url: '../classPhoto/classPhoto',
+    })
+  },
+ 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

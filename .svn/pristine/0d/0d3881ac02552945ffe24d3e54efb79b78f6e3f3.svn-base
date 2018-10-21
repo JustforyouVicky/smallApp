@@ -1,0 +1,17 @@
+<view class="container-body">
+  
+  <view class="top-bg">
+    <view class="mini-pic">
+      <view>
+        <image bindtap="bindViewTap" class="mini-avatar" src="../../img/8.png" background-size="cover"/>
+      </view>
+      <text class="mini-name">爱索儿童科学会</text>
+    </view>
+  </view>
+  <view class="detail">
+    <view class="title">将登录爱索儿童科学会,请确认是本人操作</view>
+    <view class="confirm">
+      <button type="primary" size="default"  open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登录</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,150 @@
+const app=getApp();
+Page({
+  data:{
+    userInfo: {},
+    hasUserInfo: false,
+    uphone:'',
+    children_name:'',
+    children_id:''
+  },
+  onLoad(options) {
+    this.setData({
+      userInfo:app.globalData.userInfo,
+      uphone:app.globalData.uphone,
+      hasUserInfo:app.globalData.hasUserInfo
+    })
+    wx.getStorage({
+      key: 'children_info',
+      success: res=>{
+        this.setData({
+          children_id:res.data.children_id,
+          children_name:res.data.children_name
+        })
+        wx.stopPullDownRefresh();     
+        wx.getStorage({
+          key: 'uname',
+          success: res=>{
+            this.setData({uphone:res.data});
+          },
+          fail: function() {
+            wx.showModal({
+              content:'亲，您还没有绑定账号哟！',
+              confirmText:'去绑定！',
+              cancelText:'没有账号',
+              cancelColor:'#adadad',
+              confirmColor:'#f00',
+              success:res=>{
+                if(res.confirm){
+                  wx.navigateTo({url: '../switchAccount/switchAccount'});
+                }
+              }
+            })
+          }
+        })
+      },
+      fail: ()=> {
+        wx.getStorage({
+          key:"uname",
+          success:res=>{
+            this.setData({uphone:res.data});
+            wx.request({
+              url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+              data: {
+                token:this.data.uphone,
+                type:'SwitchChildrenOnlyOne'
+              },
+              method: 'GET',
+              header: { 'content-type': 'application/json'}, 
+              success:res=>{
+                if(res.data!==undefined){
+                  var res=JSON.parse(res.data).Students[0];
+                  this.setData({
+                    children_id:res.children_id,
+                    children_name:res.children_name
+                  })
+                }
+              },
+              fail:()=>{
+                wx.showModal({
+                  content:'网络故障,请检查!',
+                  showCancel:false,	
+                })
+              }
+            })
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'亲，您还没有绑定账号哟！',
+              confirmText:'去绑定！',
+              cancelText:'没有账号',
+              cancelColor:'#adadad',
+              confirmColor:'#f00',
+              success:res=>{
+                if(res.confirm){
+                  wx.navigateTo({url: '../switchAccount/switchAccount'});
+                }
+              }
+            })
+          }
+        });
+      },
+    })  
+  },
+  datum(){
+    wx.navigateTo({
+      url:'../datum/datum?children_id='+this.data.children_id
+    });
+  },
+  change(){
+    wx.navigateTo({
+      url:'../changeStu/changeStu?user_id='+this.data.uphone
+    });
+  },
+  bind(){
+    var uid= wx.getStorage({
+      key:'uname',
+      success:res=>{
+        if(res.data){
+          wx.navigateTo({
+            url:'../bind/bind'
+          });
+        }
+      },
+      fail:()=>{
+        wx.navigateTo({
+          url: '../switchAccount/switchAccount'
+        })
+      }
+    }) 
+  },
+  recommend(){
+    wx.navigateTo({url:'../recommend/recommend'});
+  },
+  setting(){
+    wx.navigateTo({
+      url:'../setting/setting'
+    });
+  },
+  changeClass(){
+    wx.navigateTo({
+      url:`../changeClass/changeClass?children_name=${this.data.children_name}&children_id=${this.data.children_id}`
+    });
+  },
+  payRecord(){
+    wx.navigateTo({
+      url:'../payRecord/payRecord?children_name='+this.data.children_name
+    });
+  },
+  accredit(){
+    wx.navigateTo({
+      url: '../accredit/accredit',
+      success:res=>{
+
+      }
+    })
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage() {}
+})

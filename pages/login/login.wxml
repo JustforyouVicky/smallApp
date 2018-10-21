@@ -1,0 +1,13 @@
+<view class="container-body">
+  <view class="login">
+    <view>
+      <input value="{{uname}}" type="text" placeholder="云账号" bindblur="uidBlur"  bindinput ="unameInput"/>
+    </view>
+    <view>
+      <input value="{{upwd}}" type="password" placeholder="密码" bindinput ="passwordInput" bindblur="pwdBulr"/>
+    </view>
+    <view>
+      <button type="warn" size="default" bindtap='login'>确定</button>
+    </view>
+  </view>
+</view>

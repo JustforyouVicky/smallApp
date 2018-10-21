@@ -1,0 +1,42 @@
+.container-body{
+  padding:50rpx 0;
+  box-sizing: border-box;
+}
+.container-body>view{
+  height:300rpx;
+  width:90%;
+  border-radius: 20rpx;
+  margin:0 auto;
+  position: relative;
+  letter-spacing: 0.2rem;
+}
+.container-body>view>.detail{
+  width:80%;
+  height:60%;
+  line-height: 80rpx;
+  text-align: center;
+  z-index:222;
+  color:#fff;
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  margin:auto;
+}
+.container-body>view>image{
+  height:90%;
+  width:100%;
+  position: absolute;
+  top:0;
+  left:0;
+}
+.first>.detail>view:first-child,
+.second>.detail>view:first-child{
+  font-size:50rpx;
+  font-weight: bold;
+}
+.first>.detail>view:last-child,
+.second>.detail>view:last-child{
+  font-size:34rpx;
+}

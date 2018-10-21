@@ -1,0 +1,17 @@
+.photo-list {
+  padding: 30rpx 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+}
+.photo-item {
+  width: 32%;
+  height: 240rpx;
+  margin:0 5rpx 16rpx;
+}
+.photo-item image {
+  width: 100%;
+  height: 100%;
+}

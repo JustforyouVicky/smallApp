@@ -1,0 +1,217 @@
+const app = getApp();
+var imgUrl= app.globalData.imgUrl;
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    bind:'',
+    featureClassId:0,
+    surplus:[],
+    total_class:null,
+    num_class:null,
+    rest_class:null,
+    CoursesSpecialty:[],//特色课    
+    banner:[  //轮播图
+      imgUrl+'/index/banner-1.png',
+      imgUrl+'/index/banner-1.png',
+      imgUrl+'/index/banner-1.png'
+    ],
+    
+    activityUrl:[
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png',
+      imgUrl+'/index/act-1.png'
+    ],
+    classPhotoUrl:[
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png',
+      imgUrl+'/index/photo-1.png'
+    ],
+    teacherUrl:[
+      imgUrl+'/index/teacher-1.png',
+      imgUrl+'/index/teacher-1.png',
+      imgUrl+'/index/teacher-1.png'
+    ]
+  },
+  onLoad(options) {
+    //剩余课时
+    wx.getStorage({
+      key: 'uname',
+      success: res=>{
+        this.setData({
+          uphone:res.data
+        })
+        wx.getStorage({
+          key: 'children_info',
+          success: res=>{
+            wx.request({
+              url: 'https://small.aisuoedu.com/api/WeChatHome',
+              data: {
+                token1:this.data.uphone,
+                token2:res.data.children_id,
+                type:'GetRemainingClassTime'
+              },
+              method: 'GET',
+              header: { 'content-type': 'application/json'}, 
+              success:res=>{
+                var res=JSON.parse(res.data).class_time;
+                // console.log(res);
+                this.setData({
+                  surplus:res,
+                  total_class:res[0].total_class,
+                  num_class:res[0].num_class,
+                  rest_class:res[0].rest_class
+                })
+              },
+              fail:()=>{
+                wx.showModal({
+                  content:'网络故障,请检查!',
+                  showCancel:false,	
+                })
+              }
+            });
+          },
+          fail:()=> {
+            wx.getStorage({
+              key: 'children_id',
+              success: res=>{
+                wx.request({
+                  url: 'https://small.aisuoedu.com/api/WeChatHome',
+                  data: {
+                    token1:this.data.uphone,
+                    token2:res.data,
+                    type:'GetRemainingClassTime'
+                  },
+                  method: 'GET',
+                  header: { 'content-type': 'application/json'}, 
+                  success:res=>{
+                    var res=JSON.parse(res.data).class_time;
+                    this.setData({
+                      surplus:res,
+                      total_class:res[0].total_class,
+                      num_class:res[0].num_class,
+                      rest_class:res[0].rest_class
+                    })
+                    console.log(this.data.rest_class);
+                  },
+                  fail:()=>{
+                    wx.showModal({
+                      content:'网络故障,请检查!',
+                      showCancel:false,	
+                    })
+                  }
+                });
+              }
+            })
+          }
+        })
+      },
+      fail:()=> {
+        wx.showModal({
+          content:'亲，您还没有绑定账号哟！',
+          confirmText:'去绑定！',
+          cancelText:'没有账号',
+          cancelColor:'#adadad',
+          confirmColor:'#f00',
+          success:res=>{
+            if(res.confirm){
+              wx.navigateTo({
+                url: '../switchAccount/switchAccount'
+              })
+            }else if(res.cancel){
+              
+            }
+          }
+        })
+      }
+    })
+    //特色课展示
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {type:'GetSpecoaltyCoursesIdPicture'},
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        var res=JSON.parse(res.data).CoursesSpecialty;
+        this.setData({
+          CoursesSpecialty:res
+        })
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    });
+  },
+  //消息
+  info(){
+    wx.navigateTo({
+      url: '../info/info',
+    })
+  },
+  //周课表
+  timetable(){
+    wx.navigateTo({
+      url: '../timetable/timetable'
+    })
+  },
+  //课堂记录
+  classRecord(){
+    wx.navigateTo({
+      url: '../classRecord/classRecord'
+    })
+  },
+  //剩余课时
+  surplus(){
+    wx.navigateTo({
+      url: `../surplus/surplus?total_class=${this.data.total_class}&num_class=${this.data.num_class}&rest_calss=${this.data.rest_class}`,
+    })
+  },
+  //特色课详情
+  featureClass(e){
+    var courses_specoalty_id=e.currentTarget.dataset.feaid;
+    wx.navigateTo({
+      url: '../featureClass/featureClass?courses_specoalty_id='+courses_specoalty_id,
+    })
+  },
+  //近期活动
+  activity:function(){
+    wx.navigateTo({
+      url: '../activity/activity',
+      success:res=>{
+        
+      },
+      fail:()=>{
+        
+      }
+    })
+  },
+  //班级相册
+  classPhoto:function(){
+    wx.navigateTo({
+      url: '../classPhoto/classPhoto',
+    })
+  },
+ 
+  onShow: function () {
+  
+  },
+
+  onPullDownRefresh: function () {
+  
+  },
+
+  onReachBottom: function () {
+  
+  },
+
+  onShareAppMessage: function () {
+  
+  }
+})

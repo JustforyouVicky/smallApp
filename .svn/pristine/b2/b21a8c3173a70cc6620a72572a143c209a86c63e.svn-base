@@ -1,0 +1,42 @@
+const app = getApp();
+var videoUrl= app.globalData.videoUrl;
+Page({
+  data: {
+    courses_specoalty_id:null,
+    CoursesSpecialty:{}
+  },
+  onLoad(options) {
+    console.log(options);
+    var courses_specoalty_id=options.courses_specoalty_id
+    wx.request({
+      url: 'https://small.aisuoedu.com/api/WeChatHome',
+      data: {
+        token:courses_specoalty_id,
+        type:'GetCoursesSpecialty'
+      },
+      method: 'GET', 
+      header: { 'content-type':'application/json'}, 
+      success:res=>{
+        console.log(res.data);
+        var res=JSON.parse(res.data).CoursesSpecialty[0];
+        console.log(res);
+        this.setData({
+          CoursesSpecialty:res
+        })
+      },
+      fail:()=> {
+        wx.showModal({
+          content:'网络故障，请检查！',
+          showCancel:false
+        })
+      }
+    })
+  },
+ 
+  onPullDownRefresh: function () {
+  
+  },
+  onShareAppMessage: function () {
+  
+  }
+})

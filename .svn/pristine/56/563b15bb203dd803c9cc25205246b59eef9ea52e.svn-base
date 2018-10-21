@@ -1,0 +1,23 @@
+<view class="container-body">
+  <view class="photo-list">
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,39 @@
+
+<view class="container-body">
+  <view class="search">
+    <icon type="search" size="16"></icon>
+    <input type="text" placeholder="搜索你喜欢的..." />
+  </view>
+  <view class="feature">
+    <view class="title">
+      <view>
+        <text></text>
+        <text>最新推荐</text>
+      </view>
+    </view>
+    <view class="scroll-container">
+      <scroll-view scroll-x class="fea-scroll">
+        <view id="fea{{index}}" class="fea-item" wx:for="{{featureUrl}}" wx:key="{{index}}" bindtap="featureClass">
+          <image src="{{item}}"></image>
+        </view>
+      </scroll-view>  
+    </view>
+  </view>
+  <view class="recomm">
+    <view class="title">
+      <view>
+        <text></text>
+        <text>热门课程</text>
+      </view>
+    </view>
+    <view class="recomm-list">
+      <view bindtap="expressionDetail" class="recomm-item" wx:for="{{hotClass}}" wx:key="{{index}}">
+        <image src="{{item}}"/>
+        <view class="class-title">触觉</view>
+      </view>
+
+    </view>
+  </view>
+
+</view>
+  

@@ -1,0 +1,56 @@
+<view class="container-body">
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">爱索正式课</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">爱索活动课</view>
+  </view>
+  <view class='change' current="{{currentTab}}">
+    
+    <view class="change-item hide{{showView?'show':''}}">
+      <view class="no-img" wx:if="{{aisuoLessons.length==0}}">
+        <image src="../../img/6.png"/>
+      </view>
+      <view  wx:if="{{aisuoLessons.length>0}}" data-idx="{{item.details_id}}" bindtap="classDetail" wx:for="{{aisuoLessons}}" wx:key="{{index}}" class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/11.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>{{item.literacy_point_name}}</view>
+              <text>{{item.class_date}}</text>
+            </view>
+            <view class="rf sign">
+              <view class="{{item.is_read==1?'unread':''}}"></view>
+            </view>
+          </view>
+        </view>
+      </view>    
+    </view>
+    <view class="change-item child-class hide{{showView?'':'show'}}">
+      <view class="no-img" wx:if="{{noAisuoLessons.length==0}}">
+        <image src="../../img/6.png"/>
+      </view>
+      <view wx:if="{{noAisuoLessons.length>0}}" data-idx="{{item.details_id}}" bindtap="classDetail" wx:for="{{noAisuoLessons}}" wx:key="{{index}}" class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/11.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>{{item.literacy_point_name}}</view>
+              <text>{{item.class_date}}</text>
+            </view>
+            <view class="rf sign">
+              <view class="{{item.is_read==1?'unread':''}}"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+  

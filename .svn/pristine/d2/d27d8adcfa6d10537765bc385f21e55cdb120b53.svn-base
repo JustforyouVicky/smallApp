@@ -1,0 +1,35 @@
+<view class="container-body">
+  <view class="photo-list">
+    <view class="photo-item"  bindtap="pDetail">
+      <image data-img="0" src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="1">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="2">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="3">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="4">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="5">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+
+  </view>
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="img-model">
+      <image bindlongpress="listenerButton" bindtap="closeModel" src='{{clickImg}}'/>
+    </view>
+    <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+      <block > 
+        <action-sheet-item bindtap="saveImg">保存到相册</action-sheet-item>
+      </block>
+      <!--自动隐藏action-sheet-->
+      <action-sheet-cancel bindtap="cancel">取消</action-sheet-cancel>
+     </action-sheet>
+  </view>
+</view>

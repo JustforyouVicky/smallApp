@@ -1,0 +1,92 @@
+
+Page({
+  data: {
+    order_id:null,
+    uphone:'',
+    Orders:[],
+    payWayImg:[
+      'https://small.aisuoedu.com/mini/img/user/1(10).png',
+      'https://small.aisuoedu.com/mini/img/user/1(11).png',
+      'https://small.aisuoedu.com/mini/img/user/1(12).png',
+      'https://small.aisuoedu.com/mini/img/user/1(13).png'
+    ]
+  },
+
+  onLoad(options) {
+    console.log(options);
+    this.setData({
+      order_id:options.order_id
+    })
+    wx.getStorage({
+      key: 'uname',
+      success: res=>{
+        console.log(res);
+        this.setData({
+          uphone:res.data
+        })
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+          data: {
+            token1:this.data.uphone,
+            token2:this.data.order_id,
+            type:'GetOrderInformReceipt'
+          },
+          method: 'GET', 
+          header: { 'content-type': 'application/json'}, 
+          success:res=>{
+            console.log(res.data);
+            var res=JSON.parse(res.data).Orders;
+            console.log(res);
+            this.setData({
+              Orders:res
+            })
+          },
+          fail:()=> {
+            wx.showModal({
+              content:'网络故障，请检查！',
+              showCancel:false
+            })
+          }
+        })
+
+      },
+  
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

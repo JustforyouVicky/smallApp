@@ -1,0 +1,64 @@
+<view class="container-body">
+  <view class="bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/1(16).png'/>
+  </view>
+  <view class="pre-list">
+    <view class="pre-item clear">
+      <view class="left lf">姓名</view>
+      <view class="right rf">{{Students.children_name}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">性别</view>
+      <view class="right rf">{{Students.children_sex}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">身份证号码</view>
+      <view class="right rf">{{Students.children_idnum}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">出生日期</view>
+      <view class="right rf">{{Students.children_birthday}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">民族</view>
+      <view class="right rf">{{Students.national}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">学校班级</view>
+      <view class="right rf">{{Students.school_class}}</view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">退款账号</view>
+      <view class="right rf">
+        <input type="text" placeholder="请输入退款账号" bindinput="checkCard" bindblur="checkBlur"/>
+      </view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">开户名</view>
+      <view class="right rf">
+        <input type="text" placeholder="请输入账号的开户名" bindinput="cardName"/>
+      </view>
+    </view>
+    <view class="pre-item clear">
+      <view class="left lf">开户银行</view>
+      <view class="right rf">
+        <input type="text" placeholder="请输入开户银行" bindinput="bankName"/>
+      </view>
+    </view>
+    <view class="reason">
+      <view>退款原因</view>
+      <view>
+        <input type="text" bindinput="reasonInput"/>
+      </view>
+    </view>
+    <view class="desc">
+      <view>退款说明</view>
+      <view>
+        <textarea bindinput="refund"></textarea>
+      </view>
+    </view>
+    <view class="btn">
+      <button type="warn" size="default" bindtap='submitBtn'>提交</button>
+    </view>
+  </view>
+</view>

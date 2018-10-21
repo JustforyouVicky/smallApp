@@ -1,0 +1,25 @@
+
+<view class="container">
+  <view class="container-body">
+    <view class="first clear">
+      <view class="left">
+        <view>
+          <image src='https://small.aisuoedu.com/mini/img/user/1(7).png'/>
+        </view>
+      </view>
+      <view class="right">
+        <view>陈学希</view>
+      </view>
+    </view>
+    <view class="second clear">
+      <view class="left">
+        <view>
+          <image src='https://small.aisuoedu.com/mini/img/user/1(8).png'/>
+        </view>
+      </view>
+      <view class="right">
+        <view>陈学希</view>
+      </view>
+    </view>
+  </view>
+</view>

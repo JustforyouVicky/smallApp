@@ -1,0 +1,45 @@
+const app=getApp();
+Page({
+  data:{
+    ActivityCourse:[],
+    children_id:null
+  },
+  onLoad(options) {
+    this.setData({children_id:options.children_id});
+    var uphone=app.globalData.uphone;
+    wx.showLoading({title:'加载中...'});
+    if(uphone){
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token:uphone,   
+          type:'GetActivityCourse'
+        },
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          var res=JSON.parse(res.data).ActivityCourse;
+          this.setData({ActivityCourse:res})
+        },
+        fail:()=>{
+          wx.hideLoading();
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      }); 
+    }
+  },
+  activityDetail(e){
+    var activity_id=e.currentTarget.dataset.act;
+    wx.navigateTo({
+      url: `../activityDetail/activityDetail?activity_id=${activity_id}&children_id=${this.data.children_id}`
+    });
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage() {}
+});

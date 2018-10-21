@@ -1,0 +1,24 @@
+<view class="container-body">
+  <view class="top-bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/8.png'/>
+    <view>
+      <image src='https://small.aisuoedu.com/mini/img/user/1(6).png'/>
+      <view class="share">码上分享</view>
+    </view>
+  </view>
+  <view class="bottom-list">
+    <view>
+      共分享<text>12</text>次
+    </view>
+    <view class="share-list">
+      <view class="share-item clear">
+        <view class="lf">2018-05-21</view>
+        <view class="rf">14:30</view>
+      </view>
+      <view class="share-item clear">
+        <view class="lf">2018-05-21</view>
+        <view class="rf">14:30</view>
+      </view>
+    </view>
+  </view>
+</view>

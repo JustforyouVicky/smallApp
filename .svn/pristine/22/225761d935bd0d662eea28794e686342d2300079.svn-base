@@ -1,0 +1,18 @@
+<!--pages/guide/guide.wxml-->
+<view class="container">
+  <view class="canvas-first" data-id="1">
+    <image src="https://small.aisuoedu.com/mini/img/guide/1.png" bindtap="first"/>
+  </view>
+  <view class="canvas-second" data-id="2">
+    <image src="https://small.aisuoedu.com/mini/img/guide/2.png"/>
+    <ec-canvas canvas-id="radarCanvas1"  bindtouchstart="touchHandler" id="canvas1" class="canvas1" ec="{{ ec }}"></ec-canvas>
+  </view>
+  <view class="canvas-third" data-id="3">
+    <image src="https://small.aisuoedu.com/mini/img/guide/3.png"/>
+    <ec-canvas canvas-id="radarCanvas2"  bindtouchstart="touchHandler" id="canvas2" class="canvas2" ec="{{ ec }}"></ec-canvas>
+  </view>
+  <view class="canvas-last" data-id="4">
+    <image src="https://small.aisuoedu.com/mini/img/guide/4.png"/>
+    <ec-canvas canvas-id="radarCanvas3"  bindtouchstart="touchHandler" id="canvas3" class="canvas3" ec="{{ ec }}"></ec-canvas>
+  </view>
+</view>

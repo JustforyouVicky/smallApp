@@ -1,0 +1,38 @@
+
+.container-body >.update{
+  width:100%;
+  margin-top:20rpx;
+}
+.container-body >.update>view:nth-child(2n){
+  width:100%;
+  height:100rpx;
+  background-color: #fff;
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+}
+.container-body >.update>view:nth-child(1),
+.container-body >.update>view:nth-child(3){
+  width:100%;
+  height:60rpx;
+  line-height: 60rpx;
+  padding-left:36rpx;
+  box-sizing: border-box;
+  color:#ADADAD;
+}
+.container-body >.update>view:last-child{
+  margin-top:60rpx;
+  height:100rpx;  
+}
+.container-body >.update>view>input{
+  height:100%;
+  padding-left:36rpx;
+  box-sizing: border-box;
+  font-size:30rpx;
+}
+.container-body >.update>view>button{
+  height:80%;
+  width:90%;
+  line-height: 80rpx;
+  letter-spacing: 0.2rem;
+  background-color:#FD3B3B;
+}

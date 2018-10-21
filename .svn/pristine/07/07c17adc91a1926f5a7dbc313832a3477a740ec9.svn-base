@@ -1,0 +1,124 @@
+
+.top-bg{
+  width:100%;
+  height:36%;
+  position: relative;
+}
+.top-bg>image{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+}
+.user-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top:10rpx;
+  left:10%;
+  width:80%;
+  height:90%;
+}
+.user-pic>view{
+  width:180rpx;
+  height: 180rpx;
+  border:1px solid #fff;
+  border-radius: 50%;
+  text-align:center;
+  line-height: 200rpx;
+  margin:50rpx 0;
+}
+.userinfo-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #fff;
+  font-size:36rpx;
+}
+.datum{
+  margin-top:30rpx;
+  height:150rpx;
+  line-height: 150rpx;
+  width:96%;
+  margin:30rpx auto;
+  background-color: #fff;
+  border-radius: 15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.datum .left{
+  text-align: center;
+  height:100rpx;
+  line-height: 100rpx;
+  width:50%;
+  float: left;
+  border-right:1px solid #eee;
+}
+.datum image{
+  vertical-align: middle;
+  width:36rpx;
+  height:36rpx;
+}
+.datum .right{
+  text-align: center;
+  width:50%;
+  height:100rpx;
+  line-height: 100rpx;
+  float: right;
+}
+.datum>view>text{
+  font-size:30rpx;
+  color:#333;
+  padding-left:30rpx;
+}
+/* 切换学员 */
+.change{
+  margin-top:50rpx;
+  height:90rpx;
+  line-height: 90rpx;
+  width:96%;
+  margin:30rpx auto;
+  background-color: #fff;
+  border-radius: 15rpx;
+  padding:0 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.change .left,
+.deal .left{
+  width:50%;
+  height:100%;
+  float: left;
+}
+.change .right,
+.deal .right{
+  width:50%;
+  height:100%;
+  float: right;
+  text-align: right;
+}
+.deal{
+  margin-top:50rpx;
+  height:180rpx;
+  line-height: 80rpx;
+  width:96%;
+  padding:0 10rpx;
+  box-sizing: border-box;
+  margin:30rpx auto;
+  background-color: #fff;
+  border-radius: 15rpx;
+}
+.deal>view{
+  width:100%;
+  height:50%;
+}
+.deal>view:first-child{
+  border-bottom:1px solid #eee;
+}

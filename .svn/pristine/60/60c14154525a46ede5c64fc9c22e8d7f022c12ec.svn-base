@@ -1,0 +1,129 @@
+// pages/datum/datum.js
+const app=getApp();
+Page({
+  
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    userInfo: {},
+    uphone:'',
+    Students:null,
+    isStandbyPhone:false,
+    children_name:''
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    console.log(options.children_id);
+    var children_id=options.children_id;
+    wx.getStorage({
+      key:"uname",
+      success:res=>{
+        console.log(res.data);
+        this.setData({
+          uphone:res.data
+        })
+        //获取孩子信息
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+          data: {
+            token1:this.data.uphone,
+            token2:children_id,
+            type:'GetStudentInform'
+          },
+          method: 'GET',
+          header: { 'content-type': 'application/json'}, 
+          success:res=>{
+            console.log(res.data);
+            if(res.data!=='{"Students":[]}'){
+              var res=JSON.parse(res.data).Students[0];
+              console.log(res);
+              console.log(res);
+              this.setData({
+                Students:res,
+                children_name:res.children_name
+              })
+              if(res.patriarch_standby_id==''){
+                this.setData({
+                  isStandbyPhone:true
+                })
+              }
+              
+              // console.log(this.data.children_name);
+            }
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }
+        })
+      }
+    })
+   
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function (e) {
+
+  },
+  phone(){
+    wx.navigateTo({
+      url: `../phone/phone?children_name=${this.data.children_name}&user_id=${this.data.uphone}`,
+      success: function(res){
+        
+      },
+      fail: function() {
+        // fail
+      },
+     
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

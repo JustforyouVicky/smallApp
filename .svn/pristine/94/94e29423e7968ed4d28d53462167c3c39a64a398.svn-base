@@ -1,0 +1,51 @@
+const app=getApp();
+Page({
+  data: {
+    Orders:[],
+    payWayImg:[
+      'https://small.aisuoedu.com/mini/img/user/1(10).png',
+      'https://small.aisuoedu.com/mini/img/user/1(11).png',
+      'https://small.aisuoedu.com/mini/img/user/1(12).png',
+      'https://small.aisuoedu.com/mini/img/user/1(13).png'
+    ]
+  },
+  onLoad(options) {
+      var order_id=options.order_id;
+      var uphone=app.globalData.uphone;
+    wx.showLoading({title:'加载中...'});
+    if(order_id&&uphone){
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+        data: {
+          token1:uphone,
+          token2:order_id,
+          type:'GetOrderInformReceipt'
+        },
+        method: 'GET', 
+        header: { 'content-type': 'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          if(res.data.Message=="出现错误。"){
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }else{
+            var res=JSON.parse(res.data).Orders;
+            this.setData({Orders:res});
+          }
+        },
+        fail:()=> {
+          wx.showModal({
+            content:'网络故障，请检查！',
+            showCancel:false
+          })
+        }
+      })
+    }
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+})

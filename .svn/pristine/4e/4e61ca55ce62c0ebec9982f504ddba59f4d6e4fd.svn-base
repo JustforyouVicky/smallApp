@@ -1,0 +1,65 @@
+/* pages/guide/guide.wxss */
+page{
+  background-color: #EFE8E8;
+  height:100%;
+}
+view{
+  padding:0;margin:0;
+}
+.container{
+  width:100%;
+  height:100%;
+  color:#fff;
+}
+
+/* swiper{
+  width: 100%;
+  height: 100%;
+
+}  
+swiper-item{
+  width: 100%;
+  height: 100%;
+}
+swiper-item image {
+  width: 100%;
+  height: 100%;
+} */
+.canvas-first{
+  /* display:none; */
+}
+/* .canvas-second{
+  display:none;
+}
+.canvas-third{
+  display:none;
+}
+.canvas-last{
+  display:none;
+} */
+.canvas-first,.canvas-second,
+.canvas-third,.canvas-last{
+  width:100%;
+  height:100%;
+  position: relative;
+}
+.canvas-first>image,
+.canvas-second>image,
+.canvas-third>image,
+.canvas-last>image
+{
+  width:100%;
+  height:100%;
+}
+.canvas-second ec-canvas,
+.canvas-third ec-canvas,
+.canvas-last ec-canvas{
+  width:100%;
+  height:500rpx;
+  position: absolute;
+  top:200rpx;
+  left:0;
+  z-index: 666;
+  color:#fff;
+}
+

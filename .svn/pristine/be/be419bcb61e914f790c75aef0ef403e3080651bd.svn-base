@@ -1,0 +1,98 @@
+const app=getApp();
+Page({
+  data:{
+    time:0,
+    Share:[],
+    imgUrl:[],
+    shareDate:'',
+    shareTime:''
+  },
+  onLoad(options){
+    var uphone=app.globalData.uphone;
+    if(uphone){ 
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token:uphone,   
+          type:'GetQRcode'
+        },
+        method:'GET',
+        header:{'content-type':'application/json'}, 
+        success:res=>{
+          if(res.data.Message=="出现错误。"){
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            });
+          }else{
+            var res=JSON.parse(res.data).QRCodeUrl;
+            var imgUrl=[];
+            imgUrl.push(res);
+            this.setData({imgUrl:imgUrl});
+          }
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token:uphone,   
+          type:'GetShareTime'
+        },
+        method:'GET',
+        header:{'content-type':'application/json'}, 
+        success:res=>{
+          if(res.data.Message=="出现错误。"){
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            });
+          }else{
+            var res=JSON.parse(res.data).time;
+            this.setData({time:res});
+          }
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token:uphone,   
+          type:'GetShare'
+        },
+        method:'GET',
+        header:{'content-type':'application/json'}, 
+        success:res=>{
+          if(res.data.Message=="出现错误。"){
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            });
+          }else{
+            var res=JSON.parse(res.data).Share;
+            this.setData({Share:res});
+          }
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+     
+    }
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

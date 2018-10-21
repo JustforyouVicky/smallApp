@@ -1,0 +1,38 @@
+Page({
+  data: {
+    CoursesSpecialty:{}
+  },
+  onLoad(options) {
+    var courses_specoalty_id=options.courses_specoalty_id;
+    wx.showLoading({title:'加载中...'});
+    if(courses_specoalty_id){
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {
+          token:courses_specoalty_id,
+          type:'GetCoursesSpecialty'
+        },
+        method: 'GET', 
+        header: { 'content-type':'application/json'}, 
+        success:res=>{
+          console.log(res.data);
+          wx.hideLoading();
+          var res=JSON.parse(res.data).CoursesSpecialty[0];
+          this.setData({CoursesSpecialty:res});
+        },
+        fail:()=> {
+          wx.hideLoading();
+          wx.showModal({
+            content:'网络故障，请检查！',
+            showCancel:false,
+          });
+        }
+      });
+    }
+  },
+ 
+  onPullDownRefresh(){
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+})

@@ -1,0 +1,53 @@
+const app=getApp();
+Page({
+  data: {
+    Students:[],
+    sexImg:[
+      'https://small.aisuoedu.com/mini/img/user/1(7).png',
+      'https://small.aisuoedu.com/mini/img/user/1(8).png'
+    ]
+  },
+  onLoad(options) {
+    var uphone=app.globalData.uphone;
+    wx.showLoading({title:'加载中...'});
+    if(uphone){
+      wx.request({
+        url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+        data: {
+          token:uphone,
+          type:'SwitchChildren'
+        },
+        method: 'GET',
+        header: { 'content-type': 'application/json'}, 
+        success:res=>{
+          if(res.data!=='undefined'){
+            wx.hideLoading();
+            var res=JSON.parse(res.data).Students;
+            this.setData({Students:res});
+          }
+        },
+        fail:()=>{
+          wx.hideLoading();
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          });
+        }
+      });
+    }
+  },
+  chooseChild(e){
+    var children_id=e.currentTarget.dataset.child;
+    var children_name=e.currentTarget.dataset.uname;
+    wx.setStorage({
+      key: 'children_info',
+      data: {children_id:children_id,children_name:children_name},
+      success: res=>{
+        wx.switchTab({
+          url: '../userCenter/userCenter'
+        });
+      }
+    });
+  },
+  onShareAppMessage() {}
+});

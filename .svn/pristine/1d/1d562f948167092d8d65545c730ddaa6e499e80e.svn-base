@@ -1,0 +1,152 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="container-body">
+    <!-- 轮播图 -->
+    <view class="swiper-container">
+      <swiper  autoplay='true' interval='3000' 
+        duration="500" circular='true'>
+        <swiper-item wx:if="{{SpecoaltyCourses.length>0}}" wx:for="{{SpecoaltyCourses}}" wx:key="{{index}}">
+          <image src='{{item.picture_path}}' />
+        </swiper-item>
+      </swiper>
+    </view>
+    <!-- 中间小图标 -->
+    <view class='nav-list'>
+      <image src='https://small.aisuoedu.com/mini/img/index/car.png'/>
+      <view class='nav-item'>
+        <view class='nav-btn'>
+          <image bindtap='info' src='https://small.aisuoedu.com/mini/img/index/1.png'/>
+          <view>
+            <text>消息</text>
+          </view> 
+        </view>
+      </view>
+      <view class='nav-item'>
+        <view class='nav-btn'>
+          <image bindtap="timetable" src='https://small.aisuoedu.com/mini/img/index/2.png'/>
+          <view>
+            <text>周课表</text> 
+          </view>
+        </view>
+      </view>
+      <view class='nav-item'>
+        <view class='nav-btn'>
+          <image  src='https://small.aisuoedu.com/mini/img/index/3.png'/>
+          <view>
+            <text>成长记录</text> 
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 上课表现以及剩余课时 -->
+    <view class='expression clear'>
+      <view class='left' bindtap='classRecord' >
+        <image src='https://small.aisuoedu.com/mini/img/index/8.png' />
+      </view>
+       <view class='right'>
+        <view class='surplus' bindtap="surplus" wx:if="{{surplus.length>0}}">
+          <text>{{surplus[0].rest_class}}\n</text>
+          <text>剩余课时</text>
+        </view>
+        <image src='https://small.aisuoedu.com/mini/img/index/10.png' />
+      </view> 
+    </view>
+    <!-- 特色课展示 -->
+    <view class="feature">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>特色课程展示</text>
+        </view>
+      </view>
+      <view class="scroll-container">
+        <scroll-view scroll-x class="fea-scroll" wx:if="{{CoursesSpecialty.length>0}}">
+          <view  class="fea-item" wx:for="{{CoursesSpecialty}}" data-feaid="{{item.courses_specoalty_id}}" wx:key="{{index}}" bindtap="featureClass">
+            <image src="{{item.courses_picture_path}}"></image>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <!-- 活动报名 -->
+    <view class="activity">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>活动报名</text>
+        </view>
+        <view bindtap="activity">更多>></view>
+      </view>
+      <view class="scroll-container">
+        <scroll-view scroll-x class="act-scroll">
+          <view  class="act-item" bindtap="activity" wx:for="{{ActivityCourse}}" wx:key="{{index}}">
+            <view class="act-img">
+              <image src='{{item.activity_picture_path}}'/>
+            </view>
+            <view class="desc">
+              <view class="img-title">{{item.activity_title}}</view>
+              <view class="img-subtitle">{{item.activity_introduction}}</view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <!-- 班级相册 -->
+    <view class="photo">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>班级相册</text>
+        </view>
+        <view bindtap="classPhoto">更多>></view>
+      </view>
+      <view class="scroll-container">
+        <scroll-view scroll-x class="photo-scroll">
+          <view id="photo{{index}}" class="photo-item" bindtap="classPhoto"  wx:for="{{classPhotoUrl}}" wx:key="{{index}}">
+            <view class="photo-img">
+              <image src="{{item}}"></image>
+            </view>
+            <view class="desc">
+              <view class="img-title">公开课活动课照片</view>
+              <view>
+                <text></text>
+              </view>
+              <view class="img-date">2018-02-03</view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view> 
+    <!-- 名师推荐 -->
+    <view class="teacher">
+      <view class="title clear">
+        <view>
+          <text></text>
+          <text>名师推荐</text>
+        </view>
+      </view>
+      <view class="scroll-container">
+        <scroll-view scroll-x class="teach-scroll">
+          <view id="teach{{index}}" class="teach-item clear" wx:for="{{teacherUrl}}" wx:key="{{index}}">
+            <view class="left">
+              <view>
+                <image src="{{item}}"></image>
+              </view>
+            </view>
+            <view class="right">
+              <view class="info">
+                <view>赵雪梅</view>
+                <view>
+                  <text>本科学历</text>
+                  <text>英语教师</text>
+                  <text>专业八级</text>
+                </view>
+                <view>除日常教学之外,还潜心研究家庭教育,成功帮助数百名家长走出家教误区,掌握科学教育方法。</view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>  
+      </view>
+    </view>
+  
+  </view>
+</view>

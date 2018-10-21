@@ -1,0 +1,53 @@
+<view class="container-body">
+  <view class="surplus-list">
+    <image src='https://small.aisuoedu.com/mini/img/index/shengyukeshi.png'/>
+    <view class="title">剩余<text>{{rest_class}}</text>课时</view>
+    <view class="sub-title">已上课时数</view>
+    <view class="surplus-item clear">
+      <view class="lf left">
+        <view></view>
+      </view>
+      <view class="rf right">
+        <view class="clear">
+          <view class="lf">
+            <view>触觉</view>
+            <text>2018-02-01\t\t\t\t</text>
+            <text>15:00</text>
+          </view>
+          <view class="rf">2课时</view>
+        </view>
+      </view>
+    </view>
+    <view class="surplus-item clear">
+      <view class="lf left">
+        <view></view>
+      </view>
+      <view class="rf right">
+        <view class="clear">
+          <view class="lf">
+            <view>触觉</view>
+            <text>2018-02-01\t\t\t\t</text>
+            <text>15:00</text>
+          </view>
+          <view class="rf">2课时</view>
+        </view>
+      </view>
+    </view>
+    <view class="surplus-item clear">
+      <view class="lf left">
+        <view></view>
+      </view>
+      <view class="rf right">
+        <view class="clear">
+          <view class="lf">
+            <view>触觉</view>
+            <text>2018-02-01\t\t\t\t</text>
+            <text>15:00</text>
+          </view>
+          <view class="rf">2课时</view>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>

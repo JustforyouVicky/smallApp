@@ -1,0 +1,114 @@
+// pages/payRecord/payRecord.js
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    children_name:'',
+    user_id:'',
+    Orders:[],
+    payWayImg:[
+      'https://small.aisuoedu.com/mini/img/user/1(10).png',
+      'https://small.aisuoedu.com/mini/img/user/1(11).png',
+      'https://small.aisuoedu.com/mini/img/user/1(12).png',
+      'https://small.aisuoedu.com/mini/img/user/1(13).png'
+    ]
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    console.log(options);
+    this.setData({
+      children_name:options.children_name
+    })
+    wx.getStorage({
+      key:"uname",
+      success:res=>{
+        this.setData({
+          user_id:res.data
+        })
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+          data: {
+            token1:this.data.user_id,
+            token2:this.data.children_name,
+            type:'GetOrderInform'
+          },
+          method: 'GET',
+          header: { 'content-type': 'application/json'}, 
+          success:res=>{
+            console.log(res.data);
+            var res=JSON.parse(res.data).Orders;
+            console.log(res);
+            this.setData({
+              Orders:res
+            })
+            
+          },
+          fail:res=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }
+        })
+      }
+    });
+
+   
+  },
+  onReady: function () {
+  
+  },
+  record(e){
+    console.log(e.currentTarget.dataset.order);
+    var order_id=e.currentTarget.dataset.order;    
+    wx.navigateTo({
+      url: '../record/record?order_id='+order_id
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

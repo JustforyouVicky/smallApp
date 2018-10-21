@@ -1,0 +1,150 @@
+
+Page({
+  data: {
+    refundReason :'',//退款原因
+    refundDesc:''  ,//退款说明
+    checkCard:'',
+    cardName:'',
+    bankName:'',
+    uphone:'',
+    order_id:null,
+    children_id:null,
+    children_name:''
+  },
+
+
+  onLoad(options) {
+    console.log(options);
+    this.setData({
+      order_id:options.order_id,
+      children_id:options.children_id
+    })
+    wx.getStorage({
+      key:"uname",
+      success:res=>{
+         console.log(res.data);
+        this.setData({
+          uphone:res.data
+        })
+        //获取孩子信息
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+          data: {
+            token1:res.data,
+            token2:this.data.children_id,
+            type:'GetStudentInform'
+          },
+          method: 'GET',
+          header: { 'content-type': 'application/json'}, 
+          success:res=>{
+            console.log(res.data);
+            if(res.data!=='{"Students":[]}'){
+              var res=JSON.parse(res.data).Students[0];
+              console.log(res);
+              this.setData({
+                Students:res,
+                children_name:res.children_name
+              })
+            }
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }
+        })
+      }
+    })
+  },
+
+onReady: function () {
+  
+},
+//开户名
+cardName(e){
+  this.setData({
+    cardName:e.detail.value
+  })
+},
+//银行名称
+bankName(e){
+  this.setData({
+    bankName:e.detail.value
+  })
+},
+//银行卡号
+checkCard(e){
+  this.setData({
+    checkCard:e.detail.value
+  })
+},
+//验证银行卡号
+checkBlur(){
+  var reg=/^([1-9]{1})(\d{15}|\d{18})$/;
+  if(!reg.test(this.data.checkCard)){
+    wx.showModal({
+      content:'银行卡号格式错误，请重新输入！',
+      showCancel:false,
+    })
+  }
+},
+//退款原因
+reasonInput(e){
+  this.setData({
+    refundReason:e.detail.value 
+  })
+},
+refund(e){
+  this.setData({
+    refundDesc:e.detail.value
+  })
+},
+submitBtn(){
+  wx.request({
+    url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+    data: {
+      order_id:this.data.order_id,
+      user_account_name:this.data.cardName,
+      user_bank_name:this.data.bankName,
+      user_refund_account:this.data.checkCard,
+      user_refund_reason:this.data.refundReason,
+      user_id:this.data.uphone,
+      children_name:this.data.children_name,
+      user_refund_instruction:this.data.refundDesc,
+      type:'RefundApply'
+    },
+    method: 'POST', 
+    header: { 'content-type': 'application/json'}, 
+    success:res=>{
+      console.log(res);
+      if(res.data=='{"results":"已提交完成"}'){
+        wx.showToast({
+          title:'订单提交完成，请等待工作人员处理。',
+          duration:5000,
+        })
+      }else if(res.data=='{"results":"已有退费订单正在进行退费中"}'){
+        wx.showModal({
+          content:'您已有退费订单正在进行退费中，请等待工作人员处理。',
+          showCancel:false
+        })
+      }else{
+        wx.showModal({
+          content:'退费订单提交失败，请重试！',
+          showCancel:false
+        })
+      }
+    },
+    fail:()=> {
+      wx.showModal({
+        content:'网络故障，请检查！',
+        showCancel:false
+      })
+    }
+  })
+},
+  
+  onShareAppMessage: function () {
+  
+  }
+})

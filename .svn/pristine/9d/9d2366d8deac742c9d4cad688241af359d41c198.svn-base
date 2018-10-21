@@ -1,0 +1,21 @@
+<view class="container-body">
+  <view class="no-img" >
+    <image  wx:if="{{PhotoPath.length==0}}" src="../../img/6.png"/>
+  </view>
+  <view class="photo-list" wx:if="{{PhotoPath.length>0}}">
+    <view wx:for="{{PhotoPath}}" wx:key="{{index}}" class="photo-item">
+      <image data-idx="{{index}}" data-img="{{item.photo_path}}" bindtap="pDetail" src="{{item.photo_path}}" />
+    </view>
+  </view> 
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="img-model">
+      <image bindtouchstart="start" bindtouchmove="move" bindtouchend="end" bindlongpress="listenerButton" bindtap="closeModel" src='{{clickImg}}'/>
+    </view>
+    <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+      <block > 
+        <action-sheet-item bindtap="saveImg">保存到相册</action-sheet-item>
+      </block>
+      <action-sheet-cancel bindtap="cancel">取消</action-sheet-cancel>
+     </action-sheet>
+  </view>
+</view>

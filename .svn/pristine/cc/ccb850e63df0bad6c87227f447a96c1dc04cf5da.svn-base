@@ -1,0 +1,95 @@
+.container-body{
+  padding:30rpx;
+  box-sizing: border-box;
+}
+.search{
+  height:100rpx;
+  width:100%;
+  line-height: 100rpx;
+  position: relative;
+}
+.search icon{
+  position: absolute;
+  top:8rpx;
+  left:30rpx;
+}
+.search input{
+  width:100%;
+  height:80rpx;
+  border-radius: 15rpx;
+  background-color:#eee;
+  padding-left:80rpx;
+  box-sizing: border-box;
+}
+ 
+swiper {
+  height: 340rpx;
+  box-shadow: 1px 1px 1px 2px #888;
+  text-align: center;
+}
+swiper-item{
+  height:100%;  
+}
+swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container{
+  position: relative;
+  margin:20rpx 0 40rpx;
+}
+.recomm{
+  width:100%;
+  height:60rpx;
+}
+.recomm .title{
+  color:#000;
+  font-weight: bold;
+  font-size:32rpx;
+  letter-spacing: 0.2rem;
+}
+.recomm .title>view>text:first-child{
+  width:10rpx;
+  height:30rpx;
+  margin-right:10rpx;
+  border-left:6rpx solid #fd3b3a;
+}
+.recomm-list{
+  margin:30rpx 0 100rpx;
+  width:100%;
+  padding:0 10rpx;
+  box-sizing: border-box;
+}
+.recomm-item{
+  width:100%;
+  height:220rpx;
+  padding:20rpx 0;
+  box-sizing: border-box;
+}
+.recomm-item>.left{
+  width:28%;
+  height:100%;
+}
+.recomm-item image{
+  width:150rpx;
+  height:150rpx;
+  border-radius: 12rpx;
+  box-sizing: border-box;
+}
+.recomm-item>.right{
+  width:72%;
+  height:100%;
+  text-align:left;
+  border-bottom:1px solid #eee;
+}
+.recomm-item>.right .title{
+  color:#ababab;
+  margin-bottom:20rpx;
+}
+.recomm-item>.right .detail{
+  color:#adadad;
+  font-size:28rpx; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

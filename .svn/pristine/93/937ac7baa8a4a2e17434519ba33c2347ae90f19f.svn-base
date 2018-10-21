@@ -1,0 +1,52 @@
+<view class="container-body">
+  <view class="pay-list" bindtap="record">
+    <image src="https://small.aisuoedu.com/mini/img/user/1(9).png"/>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">收据单号\t:\t<text>20180513123</text></view>
+        <view class="rf right">
+          <image class="icon-img" src="https://small.aisuoedu.com/mini/img/user/1(10).png"/>
+          <text>10245.00</text>
+        </view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">缴费项目号\t:\t<text>爱索一年包</text></view>
+        <view class="rf right red">全款</view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">海星姓名\t:\t<text>陈学希</text></view>
+        <view class="rf right">海星姓名\t:\t<text>王某某</text></view>
+      </view>
+    </view>
+
+  </view>
+  <view class="pay-list">
+    <image src="https://small.aisuoedu.com/mini/img/user/1(9).png"/>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">收据单号\t:\t<text>20180513123</text></view>
+        <view class="rf right">
+          <image class="icon-img" src="https://small.aisuoedu.com/mini/img/user/1(11).png"/>
+          <text>10245.00</text>
+        </view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">缴费项目号\t:\t<text>爱索一年包</text></view>
+        <view class="rf right red">全款</view>
+      </view>
+    </view>
+    <view class="pay-item">
+      <view class="clear">
+        <view class="lf left">海星姓名\t:\t<text>陈学希</text></view>
+        <view class="rf right">海星姓名\t:\t<text>王某某</text></view>
+      </view>
+    </view>
+
+  </view>
+</view>

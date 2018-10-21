@@ -1,0 +1,23 @@
+<view class="container-body">
+  <view class="top-bg">
+    <image src='https://small.aisuoedu.com/mini/img/user/8.png'/>
+    <view>
+      <image data-img="{{imgUrl[0]}}" src='{{imgUrl[0]}}'/>
+      <view class="share">码上分享</view>
+    </view>
+  </view>
+  <view class="bottom-list">
+    <view>
+      共分享<text>{{time}}</text>次
+    </view>
+    <view class="no-img">
+      <image  wx:if="{{Share.length==0}}" src="../../img/6.png"/>
+    </view>
+    <view class="share-list" wx:if="{{Share.length>0}}">
+      <view class="share-item clear" wx:for="{{Share}}" wx:key="{{index}}">
+        <view class="lf left">{{item.share_add_date}}</view>
+        <view class="rf right">{{item.share_shared_nickname}}</view>
+      </view>
+    </view>
+  </view>
+</view>

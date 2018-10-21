@@ -1,0 +1,117 @@
+<view class="container-body">
+  <view class="table">
+    <view class="tr">
+      <view class="th" bindtap="activate">
+        <view wx:if="{{!isClick}}">请假</view>
+        <view wx:else>取消</view>
+      </view>
+      <view class="th">
+        <view>周一\n{{days[0]}}</view>
+      </view>
+      <view class="th">
+        <view>周二\n{{days[1]}}</view>
+      </view>
+      <view class="th">
+        <view>周三\n{{days[2]}}</view>
+      </view>
+      <view class="th">
+        <view>周四\n{{days[3]}}</view>
+      </view>
+      <view class="th">
+        <view>周五\n{{days[4]}}</view>
+      </view>
+      <view class="th">
+        <view>周六\n{{days[5]}}</view>
+      </view>
+      <view class="th">
+        <view>周日\n{{days[6]}}</view>
+      </view>
+    </view>
+    <view class="no-img" >
+      <image  wx:if="{{ClassPeriod==undefined}}" src="../../img/6.png"/>
+    </view>
+    <view class="tr">
+      <view class="td">
+        <view class="time">{{ClassPeriod[0].settime}}</view>
+      </view>
+      <view wx:if="{{newOne['09:00~10:30'].length>0}}"  data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+        class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+        bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" 
+        wx:for="{{newOne['09:00~10:30']}}" wx:key="{{index}}">
+        <view></view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+    </view>
+    <view class="tr">
+      <view class="td">
+        <view class="time">{{ClassPeriod[1].settime}}</view>
+      </view>
+      <view wx:if="{{newTwo['10:30~12:00'].length>0}}" data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+      class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+      bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" wx:for="{{newTwo['10:30~12:00']}}" wx:key="{{index}}">
+        <view>
+          <!-- <view class="finish">完</view> -->
+        </view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+    </view>
+    <view class="tr">
+      <view class="td">
+        <view class="time">{{ClassPeriod[2].settime}}</view>
+      </view>
+      <view wx:if="{{newThree['14:00~15:30'].length>0}}" data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+      class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+      bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" wx:for="{{newThree['14:00~15:30']}}" wx:key="{{index}}">
+        <view>
+          <!-- <view class="finish">完</view> -->
+        </view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+    </view>
+    <view class="tr">
+      <view class="td">
+        <view class="time">{{ClassPeriod[3].settime}}</view>
+      </view>
+      <view wx:if="{{newFour['16:00~17:30'].length>0}}" data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+      class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+      bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" wx:for="{{newFour['16:00~17:30']}}" wx:key="{{index}}">
+        <view>
+          <!-- <view class="finish">完</view> -->
+        </view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+    </view>
+    <view class="tr">
+      <view class="td">
+        <view class="time">{{ClassPeriod[4].settime}}</view>
+      </view>
+      <view wx:if="{{newFive['18:00~19:30'].length>0}}" data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+      class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+      bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" wx:for="{{newFive['18:00~19:30']}}" wx:key="{{index}}">
+        <view>
+          <view></view>
+        </view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+      <view class="td"></view>
+    </view>
+  </view>
+
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="top-btn" bindtap="close"></view>
+    <view class="img-model">
+      <view class="top">
+        <view class="date">
+          <text>{{leaveDate}}</text>
+          <text>{{week}}</text>
+          <text>{{period_time}}</text>
+        </view>
+        <view class="reason">请假原因</view>
+        <view class="select">
+          <input type="text" bindchange="leaveReason"/>
+        </view>
+      </view>
+      <view class="bottom" bindtap="submitBtn">提交请假申请</view>
+    </view>
+  </view>
+</view>

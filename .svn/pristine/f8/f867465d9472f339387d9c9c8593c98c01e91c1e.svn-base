@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/guide/guide",
+    "pages/userCenter/userCenter",
+    "pages/patriarch/patriarch",
+    "pages/expression/expression",
+    "pages/datum/datum",
+    "pages/changeStu/changeStu",
+    "pages/bind/bind",
+    "pages/login/login",
+    "pages/recommend/recommend",
+    "pages/setting/setting",
+    "pages/premium/premium",
+    "pages/changeClass/changeClass",
+    "pages/payRecord/payRecord",
+    "pages/update/update",
+    "pages/activity/activity",
+    "pages/classPhoto/classPhoto",
+    "pages/timetable/timetable",
+    "pages/surplus/surplus",
+    "pages/info/info",
+    "pages/featureClass/featureClass",
+    "pages/classRecord/classRecord",
+    "pages/photoDetail/photoDetail",
+    "pages/perpetualChage/perpetualChage",
+    "pages/record/record"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fd3b3a",
+    "navigationBarTitleText": "爱索科学素养启蒙",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#35495e",
+    "borderStyle": "#333",
+    "backgroundColor": "#f9f9f9",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "img/icon/1.png",
+        "selectedIconPath": "img/icon/1-1.png"
+      },
+      {
+        "text": "家长课堂",
+        "pagePath": "pages/patriarch/patriarch",
+        "iconPath": "img/icon/2.png",
+        "selectedIconPath": "img/icon/2-1.png"
+      },
+      {
+        "text": "学生课堂",
+        "pagePath": "pages/expression/expression",
+        "iconPath": "img/icon/3.png",
+        "selectedIconPath": "img/icon/3-1.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/userCenter/userCenter",
+        "iconPath": "img/icon/4.png",
+        "selectedIconPath": "img/icon/4-1.png"
+      }
+    ]
+  }
+}

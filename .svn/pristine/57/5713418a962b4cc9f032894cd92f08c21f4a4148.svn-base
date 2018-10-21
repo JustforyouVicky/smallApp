@@ -1,0 +1,28 @@
+<view class="container-body">
+  <view class="photo-list">
+    <view class="photo-item"  bindtap="pDetail">
+      <image mode="" data-img="0" src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="1">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="2">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="3">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="4">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+    <view class="photo-item" data-img="5">
+      <image src="https://small.aisuoedu.com/mini/img/index/act-1.png" />
+    </view>
+
+  </view>
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="img-model">
+      <image bindlongpress="saveImg" bindtap="closeModel" src='{{clickImg}}'/>
+    </view>
+  </view>
+</view>

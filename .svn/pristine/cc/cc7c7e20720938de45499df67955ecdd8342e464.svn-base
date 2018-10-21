@@ -1,0 +1,13 @@
+<view class="container-body">
+  <view class="notice">我们已经给您的手机号码136****4076发送了一条验证短信：</view>
+  <view class="msg clear">
+    <view class="lf left">
+      <input type="text" placeholder="请输入验证码"/>
+    </view>
+    <view class="rf right">剩余<text>59</text>秒</view>
+    <image src="https://small.aisuoedu.com/CheckCode/CheckCode.aspx"/>
+  </view>
+  <view class="btn">
+    <button type="primary" size="default">确定</button>
+  </view>
+</view>

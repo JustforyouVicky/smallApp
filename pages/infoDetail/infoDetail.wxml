@@ -1,0 +1,18 @@
+<view class="container-body">
+  <view class="no-img" wx:if="{{Message==undefined}}">
+    <image src="../../img/6.png"/>
+  </view>
+  <view class="list" wx:if="Message!==undefined">
+    <view class="title">{{Message.message_title}}</view>
+    <view class="date" style="color:#adadad;">{{Message.message_date}}</view>
+    <view class="detail">
+      <view class="detail-item">
+        <view class="text">{{Message.message_content}}</view>
+      </view>
+      <view class="detail-item">
+        <image src="{{Message.message_picture_path}}"/>
+      </view>
+    </view>
+  </view>
+  
+</view>

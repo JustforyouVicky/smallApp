@@ -1,0 +1,39 @@
+<view class="no-img" wx:if="{{ActivityCourse==undefined}}">
+  <image src="../../img/6.png"/>
+</view>
+<view class="container-body" wx:if="{{ActivityCourse!==undefined}}"> 
+  <view class="act-item">
+    <view class="act-img">
+      <image src='{{ActivityCourse.activity_character_picture}}'/>
+    </view>
+    <view class="desc">
+      <view class="img-title">{{ActivityCourse.activity_title}}</view>
+      <!-- <view class="img-subtitle">{{ActivityCourse.activity_introduction}}</view> -->
+    </view>
+  </view>
+  <view class="date">
+    <image class="icon-img" src="https://small.aisuoedu.com/mini/img/index/12.png"/>
+    <text>{{ActivityCourse.activity_course_date}}</text>
+  </view>
+  <view class="where">
+    <image class="icon-img" src="https://small.aisuoedu.com/mini/img/index/13.png"/>
+    <text>{{ActivityCourse.activity_place}}</text>
+  </view>
+  <view class="line">
+    <view></view>
+    <view><view></view></view>
+    <view></view>
+  </view>
+  <view class="detail">
+    <view class="title" style="font-size:36rpx;font-weight:bold;text-align:center;">活动详情</view>
+    <view class="content" style="margin:50rpx 0;">{{ActivityCourse.activity_character}}</view>
+    <view class="bottom-img" style="text-align:center;">
+      <image src="{{ActivityCourse.activity_character_picture}}"/>
+      <view class="price">
+        <text>\n￥{{ActivityCourse.activity_price}}</text>
+        <text></text>
+        <text>报名</text>
+      </view>
+    </view>
+  </view>
+</view>

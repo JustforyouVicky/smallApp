@@ -1,0 +1,61 @@
+.container-body>view{
+  height:300rpx;
+  width:90%;
+  border-radius: 20rpx;
+  margin:50rpx auto;
+}
+.blue{
+  background-image:linear-gradient(45deg,#9cecea,#5baefb);
+}
+.red{
+  background-image:linear-gradient(45deg,#dab4f6,#ff88bf);
+}
+.container-body>view>view{
+  width:50%;
+  height:80%;
+  text-align: center;
+}
+.container-body>view>.left{
+  float: left;
+  text-align: center;
+}
+.container-body>view>.left>view{
+  width:140rpx;
+  height:140rpx;
+  border-radius: 50%;
+  position: relative;
+  margin-top: 80rpx;
+  margin-left:80rpx;
+}
+.container-body>view>.left>view>image{
+  width:45rpx;
+  height:80rpx;
+}
+.container-body>view>.left>view>image,
+.container-body>view>.right>view{
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+.container-body>.blue>.left>view{
+  background-color: #64B7F9;
+}
+.container-body>.red>.left>view{
+  background-color: #FF80BB;
+}
+.container-body>view>.right{
+  float:right;
+  position: relative;
+}
+.container-body>view>.right>view{
+  width:80%;
+  height:50%;
+  margin-top:90rpx;
+  line-height: 120rpx;
+  color:#fff;
+  font-size:40rpx;
+  letter-spacing: 0.2rem;
+}

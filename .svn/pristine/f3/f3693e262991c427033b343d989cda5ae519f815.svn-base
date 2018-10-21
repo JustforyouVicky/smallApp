@@ -1,0 +1,70 @@
+const app=getApp();
+var imgUrl=app.globalData.imgUrl;
+Page({
+  data: {
+    imgList:[],
+    ClassroomUser:[],
+    searchRes:''
+  },
+  onLoad(options){
+    if(this.data.searchRes==''){
+      wx.showLoading({title:'加载中...'});
+      wx.request({ 
+        url: 'https://small.aisuoedu.com/api/WeChatClassroomUser',
+        data: {type:'GetClassroomUser'},
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          var res=JSON.parse(res.data).ClassroomUser;
+          var imgList=[];
+          for(var i=0;i<res.length;i++){
+            imgList.push(res[i].header_image);
+          }
+          this.setData({
+            ClassroomUser:res,
+            imgList:imgList
+          });
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          })
+        }
+      });
+    }
+  },
+  search(e){
+    this.setData({searchRes:e.detail.value});
+    wx.showLoading({title:'加载中...'});
+    wx.request({ 
+      url: 'https://small.aisuoedu.com/api/WeChatClassroomUser',
+      data: {
+        token:this.data.searchRes,
+        type:'QueryClassroomUser'
+      },
+      method: 'GET',
+      header: {'content-type':'application/json'}, 
+      success:res=>{
+        wx.hideLoading();
+        var res=JSON.parse(res.data).QueryClassroomUser;
+        this.setData({ClassroomUser:res});
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    }); 
+  },
+  patriarchDetail(e){
+    var project_id=e.currentTarget.dataset.idx;
+    wx.navigateTo({
+      url: '../patriarchDetail/patriarchDetail?project_id='+project_id
+    })
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

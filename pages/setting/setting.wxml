@@ -1,0 +1,26 @@
+<view class="container-body">
+  <view class="set-list">
+    <view>公众号推文设置</view>
+    <view class="set-item clear">
+      <view class="lf">课时提醒</view>
+      <view class="rf">
+        <switch checked='true' color='#fd3b3a' bindchange='remind'/>
+      </view>
+    </view>
+    <view class="set-item clear">
+      <view class="lf left">课堂表现</view>
+      <view class="rf right">
+        <switch checked='true' color='#fd3b3a' bindchange='expression'/>
+      </view>
+    </view>
+    <view class="set-item clear">
+      <view class="lf left">活动推文</view>
+      <view class="rf right">
+        <switch checked='true' color='#fd3b3a' bindchange='activity'/>
+      </view>
+    </view>
+    <view class="set-item clear" bindtap='update'>
+      <view class="lf left">修改密码</view>
+    </view>
+  </view>
+</view>

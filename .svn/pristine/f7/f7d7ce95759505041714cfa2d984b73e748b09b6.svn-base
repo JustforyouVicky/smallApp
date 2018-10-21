@@ -1,0 +1,56 @@
+App({
+  globalData: {
+    userInfo: null,
+    hasUserInfo:false,
+    uphone:'',
+    children_id:null,
+    children_name:'',
+    childrenId:null
+  },
+  onLaunch() {
+    /*获取用户信息*/
+    this.getUserInfo();
+    this.getChildrenId();
+   },
+  getUserInfo(){
+    wx.getStorage({
+      key: 'userInfo',
+      success: res=>{
+        this.globalData.userInfo=res.data;
+        this.globalData.hasUserInfo=true
+      }
+    });
+  },
+   getChildrenId(){
+    wx.getStorage({
+      key: 'uname',
+      success:res=>{
+        this.globalData.uphone=res.data;
+        wx.request({
+          url: 'https://small.aisuoedu.com/api/WeChatPersonal',
+          data: {
+            token:this.globalData.uphone,
+            type:'SwitchChildrenOnlyOne'
+          },
+          method: 'GET',
+          header: {'content-type': 'application/json'}, 
+          success:res=>{
+            var res=JSON.parse(res.data).Students[0];
+            this.globalData.children_id=res.children_id;
+            this.globalData.children_name=res.children_name;
+            if(this.childrenIdCallback){
+              this.childrenIdCallback(res);
+            }
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            });
+          }
+        });
+      }
+    });
+   }
+  
+});

@@ -1,0 +1,14 @@
+<view class="container-body">
+    <!-- <image style="height:140rpx;" src="https://small.aisuoedu.com/CheckCode/CheckCode.aspx"/> -->
+  <view class="notice">我们已经给您的手机号码{{uphone}}发送了一条验证短信：</view>
+  <view class="msg clear">
+    <view class="lf left">
+      <input type="text" placeholder="请输入验证码" bindchange="msg" maxlength="6"/>
+    </view>
+    <view class="rf right" wx:if="{{num>0}}">剩余<text>{{num}}</text>秒</view>
+    <view class="rf right" wx:else bindtap="sendMsg">重新发送</view>
+  </view>
+  <view class="btn">
+    <button type="primary" size="default" bindtap="submitBtn">确定</button>
+  </view>
+</view>

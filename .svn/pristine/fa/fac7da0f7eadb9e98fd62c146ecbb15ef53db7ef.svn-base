@@ -1,0 +1,136 @@
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    upwd:'',
+    cpwd:'',
+    isFocus:false
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+  upwdInput(e){
+    console.log(e.detail.value);
+    this.setData({
+      upwd:e.detail.value
+    })
+  },
+  cpwdInput(e){
+    console.log(e.detail.value);
+    this.setData({
+      cpwd:e.detail.value
+    })
+  },
+  //输入框失去焦点时
+  upwdBlur(){
+    console.log(this.data.upwd);
+    var pwdReg=/^[0-9A-Za-z]{4,12}$/;
+    if(!pwdReg.test(this.data.upwd)){
+      wx.showModal({
+        content:'密码必须4-12位,包含数字或字母！'
+      })
+    }
+  },
+  cpwdBlur(){
+    if(!(this.data.upwd==this.data.cpwd&&this.upwd!="")){
+        wx.showModal({
+          content:'两次密码不一致，请重新输入！',
+          showCancel:false,
+          confirmText:'重新输入',
+          success:res=>{
+            console.log(res);
+            this.setData({
+              isFocus:true,
+              upwd:'',
+              cpwd:''
+            })
+            console.log(this.data.isFocus);
+           
+          }
+        })
+    }
+
+  },
+  update(){
+    wx.showModal({
+      content:'确定要修改密码吗？',
+      confirmColor:'#333',
+      cancelColor:'#adadad',
+      success:res=>{
+        console.log(res);
+        if(res.confirm ){
+          wx.request({
+            url: 'https://small.aisuoedu.com/api/WeChat',
+            data: {upwd:this.data.upwd},
+            method: 'POST', 
+            success: res=>{
+              // success
+              
+            },
+            fail: function() {
+              wx.showModal({
+                content:'网络故障，请检查！'
+              })
+            }
+          })
+        }
+
+      }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

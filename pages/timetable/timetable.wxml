@@ -1,0 +1,64 @@
+<view class="container-body">
+  <view class="table">
+    <view class="tr">
+      <view class="th" bindtap="activate">
+        <view wx:if="{{!isClick}}" style="display:none;">请假</view>
+        <view wx:else style="display:none;">取消</view>
+      </view>
+      <view class="th">
+        <view>周一\n{{days[0]}}</view>
+      </view>
+      <view class="th">
+        <view>周二\n{{days[1]}}</view>
+      </view>
+      <view class="th">
+        <view>周三\n{{days[2]}}</view>
+      </view>
+      <view class="th">
+        <view>周四\n{{days[3]}}</view>
+      </view>
+      <view class="th">
+        <view>周五\n{{days[4]}}</view>
+      </view>
+      <view class="th">
+        <view>周六\n{{days[5]}}</view>
+      </view>
+      <view class="th">
+        <view>周日\n{{days[6]}}</view>
+      </view>
+    </view>
+    <view class="no-img" >
+      <image  wx:if="{{ClassPeriod==undefined}}" src="../../img/6.png"/>
+    </view>
+    <view class="tr" wx:for="{{classList}}" wx:key="{{index}}">
+      <view class="td">
+        <view class="time">{{item.settime}}</view>
+      </view>
+      <view   data-idx="{{item.week}}" data-time="{{item.period_time}}" data-day="{{item.day}}"
+        class="td {{item.classroom_name&&index==0?'blue':(item.classroom_name&&index==1?'yellow':(item.classroom_name&&index==2?'red':(item.classroom_name&&index==3?'green':(item.classroom_name&&index==4?'pink':(item.classroom_name&&index==5?'purple':(item.classroom_name&&index==6?'orange':''))))))}}" 
+        bindtap="{{(isClick&&item.classroom_name)?'leave':''}}" 
+        wx:for="{{item.Classtime}}" wx:key="{{index}}">
+        <view></view>
+        <view>{{item.classroom_name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="model {{showModel?'show':'hide'}}">
+    <view class="top-btn" bindtap="close"></view>
+    <view class="img-model">
+      <view class="top">
+        <view class="date">
+          <text>{{leaveDate}}</text>
+          <text>{{week}}</text>
+          <text>{{period_time}}</text>
+        </view>
+        <view class="reason">请假原因</view>
+        <view class="select">
+          <input type="text" bindchange="leaveReason"/>
+        </view>
+      </view>
+      <view class="bottom" bindtap="submitBtn">提交请假申请</view>
+    </view>
+  </view>
+</view>

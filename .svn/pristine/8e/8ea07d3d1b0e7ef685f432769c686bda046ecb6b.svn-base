@@ -1,0 +1,113 @@
+<view class="container-body">
+  <!-- 课堂记录顶部导航 -->
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">爱索正式课</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">爱索活动课</view>
+  </view>
+  <!-- 正式课和活动课切换-->
+  <view class='change' current="{{currentTab}}" duration="500" bindchange="swiperTab">
+    <!-- 正式课 -->
+    <view class="change-item hide{{showView?'show':''}}">
+      <view class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/teacher-1.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>触觉</view>
+              <text>2018-02-01\t\t\t\t</text>
+              <text>15:00</text>
+            </view>
+            <view class="rf sign">
+              <view class="unread"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/teacher-1.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>触觉</view>
+              <text>2018-02-01\t\t\t\t</text>
+              <text>15:00</text>
+            </view>
+            <view class="rf sign">
+              <view class="unread"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/teacher-1.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>触觉</view>
+              <text>2018-02-01\t\t\t\t</text>
+              <text>15:00</text>
+            </view>
+            <view class="rf sign">
+              <view></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    
+    </view>
+    <!-- 活动课 -->
+    <view class="change-item child-class hide{{showView?'':'show'}}">
+      <view class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/11.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>触觉</view>
+              <text>2018-02-01\t\t\t\t</text>
+              <text>15:00</text>
+            </view>
+            <view class="rf sign">
+              <view class="unread"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="class-item clear">
+        <view class="lf left">
+          <view>
+            <image src="https://small.aisuoedu.com/mini/img/index/11.png"/>
+          </view>
+        </view>
+        <view class="rf right">
+          <view class="clear">
+            <view class="lf title">
+              <view>触觉</view>
+              <text>2018-02-01\t\t\t\t</text>
+              <text>15:00</text>
+            </view>
+            <view class="rf sign">
+              <view></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+  

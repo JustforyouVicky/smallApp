@@ -1,0 +1,25 @@
+Page({
+  data: {},
+  onLoad(options){
+   
+    wx.request({ 
+      url: 'https://small.aisuoedu.com/CheckCode/CheckCode.aspx',
+      method: 'GET',
+      header:{
+        'content-type': 'application/x-www-form-urlencoded', 
+        'cookie':wx.getStorageSync("sessionid")//读取cookie
+    }, 
+      success:res=>{
+        console.log(res);
+      },
+      fail:()=>{
+        wx.showModal({
+          content:'网络故障,请检查!',
+          showCancel:false,	
+        })
+      }
+    });
+  },
+  onPullDownRefresh(){},
+  onShareAppMessage(){}
+})

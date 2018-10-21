@@ -1,0 +1,65 @@
+<view class="container-body">
+  <view class="info-list">
+    <view class="info-item">
+      <view class="lf left">
+        <view class="sign red"></view>
+        <view class="lf-date">
+          <text>02-03\n</text>
+          <text>14:03</text>
+        </view>
+      </view>
+      <view class="rf right">
+        <view class="rf-detail">
+          <view class="detail-title">绿地中心5月调研课抽样查询</view>
+          <view class="content">活动是由共同目的联合起来并完成一定社会职能的动作的总和。活动由目的、动机和动作构成，具有完整的结构体系。</view>
+        </view>
+      </view>
+    </view>
+    <view class="info-item">
+      <view class="lf left">
+        <view class="sign red"></view>
+        <view class="lf-date">
+          <text>02-03\n</text>
+          <text>14:03</text>
+        </view>
+      </view>
+      <view class="rf right">
+        <view class="rf-detail">
+          <view class="detail-title">绿地中心5月调研课抽样查询</view>
+          <view class="content">活动是由共同目的联合起来并完成一定社会职能的动作的总和。活动由目的、动机和动作构成，具有完整的结构体系。</view>
+        </view>
+      </view>
+    </view>
+    <view class="info-item">
+      <view class="lf left">
+        <view class="sign gray"></view>
+        <view class="lf-date">
+          <text>02-03\n</text>
+          <text>14:03</text>
+        </view>
+      </view>
+      <view class="rf right">
+        <view class="rf-detail">
+          <view class="detail-title">绿地中心5月调研课抽样查询</view>
+          <view class="content">活动是由共同目的联合起来并完成一定社会职能的动作的总和。活动由目的、动机和动作构成，具有完整的结构体系。</view>
+        </view>
+      </view>
+    </view>
+    <view class="info-item">
+      <view class="lf left">
+        <view class="sign gray"></view>
+        <view class="lf-date">
+          <text>02-03\n</text>
+          <text>14:03</text>
+        </view>
+      </view>
+      <view class="rf right">
+        <view class="rf-detail">
+          <view class="detail-title">绿地中心5月调研课抽样查询</view>
+          <view class="content">活动是由共同目的联合起来并完成一定社会职能的动作的总和。活动由目的、动机和动作构成，具有完整的结构体系。</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

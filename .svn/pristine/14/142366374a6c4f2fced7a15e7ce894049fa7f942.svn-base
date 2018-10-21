@@ -1,0 +1,195 @@
+const app=getApp();
+Page({
+  data: {
+    showModel:false,
+    isClick:false,
+    classNum:null,
+    leaveReason:'',
+    children_id:null,
+    uphone:'',
+    ClassPeriod:[],
+    ClassManage:[],
+    newOne:[],
+    newTwo:[],
+    newThree:[],
+    newFour:[],
+    newFive:[],
+    isClass:false
+  },
+  onLoad(options){
+    this.setData({
+      uphone:app.globalData.uphone,
+      children_id:options.children_id
+    });
+    wx.showLoading({title:'加载中...'});
+    if(this.data.uphone&&this.data.children_id!==null){
+      wx.request({ //获取时间段
+          url: 'https://small.aisuoedu.com/api/WeChatHome',
+          data: {    
+            token:this.data.uphone,
+            type:'GetClassPeriod'
+          },
+          method: 'GET',
+          header: {'content-type':'application/json'}, 
+          success:res=>{
+            wx.hideLoading();
+            console.log(res.data);
+            var res=JSON.parse(res.data).ClassPeriod;
+            console.log(res);
+            this.setData({ClassPeriod:res});
+          },
+          fail:()=>{
+            wx.showModal({
+              content:'网络故障,请检查!',
+              showCancel:false,	
+            })
+          }
+      }); 
+      wx.request({ //获取学生课表
+        url: 'https://small.aisuoedu.com/api/WeChatHome',
+        data: {    
+          token1:this.data.uphone,
+          token2:this.data.children_id,   
+          type:'GetClassManage'
+        },
+        method: 'GET',
+        header: {'content-type':'application/json'}, 
+        success:res=>{
+          wx.hideLoading();
+          console.log(res.data);
+          var res=JSON.parse(res.data).ClassManage;
+          console.log(res);
+          // this.setData({ClassManage:res});
+          var one=res[0],two=res[1],three=res[2],four=res[3],five=res[4];
+          var newOne={};
+          for(var key in one){
+            newOne[key]=[];
+            newOne[key].length=7;
+            for(var index in one[key]){
+              if(one[key][index]){
+                var week=Number(one[key][index]['week']);
+                newOne[key][week]=one[key][index];
+              }
+            }
+          }
+          console.log(newOne)
+          var newTwo={};
+          for(var key in two){
+            newTwo[key]=[];
+            newTwo[key].length=7;
+            for(var index in two[key]){
+              if(two[key][index]){
+                var week=Number(two[key][index]['week']);
+                newTwo[key][week]=two[key][index];
+              }
+            }
+          }
+          console.log(newTwo)
+          var newThree={};
+          for(var key in three){
+            newThree[key]=[];
+            newThree[key].length=7;
+            for(var index in three[key]){
+              if(three[key][index]){
+                var week=Number(three[key][index]['week']);
+                newThree[key][week]=three[key][index];
+              }
+            }
+          }
+          console.log(newThree)
+          var newFour={};
+          for(var key in four){
+            newFour[key]=[];
+            newFour[key].length=7;
+            for(var index in four[key]){
+              if(four[key][index]){
+                var week=Number(four[key][index]['week']);
+                newFour[key][week]=four[key][index];
+              }
+            }
+          }
+          console.log(newFour);
+
+          var newFive={};
+          for(var key in five){
+            newFive[key]=[];
+            newFive[key].length=7;
+            for(var index in five[key]){
+              if(four[key][index]){
+                var week=Number(five[key][index]['week']);
+                newFive[key][week]=five[key][index];
+              }
+            }
+          }
+          console.log(newFive);
+          
+          this.setData({
+            newOne:newOne,
+            newTwo:newTwo,
+            newThree:newThree,
+            newFour:newFour,
+            newFive:newFive
+          })
+    
+
+
+
+        },
+        fail:()=>{
+          wx.showModal({
+            content:'网络故障,请检查!',
+            showCancel:false,	
+          })
+        }
+      });     
+ 
+      var obj=[
+        {"09:00~10:30":[]},
+        {"10:30~12:00":[]}, 
+        {"14:00~15:30":[]},
+        {"16:00~17:30":
+          [
+            {week: "0", period_time: "16:00~17:30", classroom_name: "404"},
+            {week: "1", period_time: "16:00~17:30", classroom_name: "501"},
+            {week: "2", period_time: "16:00~17:30", classroom_name: "504"},
+            {week: "3", period_time: "16:00~17:30", classroom_name: "601"},
+            {week: "4", period_time: "16:00~17:30", classroom_name: "604"},
+            {week: "5", period_time: "16:00~17:30", classroom_name: "701"},
+            {week: "6", period_time: "16:00~17:30", classroom_name: "704"}
+          ]
+        }
+      ]
+
+
+
+    }
+
+  },
+  leaveReason(e){
+    this.setData({leaveReason:e.detail.value});
+  },
+  activate(e){
+    console.log(e);
+    this.setData({
+      isClick:!this.data.isClick
+    })
+    console.log(this.data.isClick);
+  },
+  leave(e){
+    console.log(e);
+    this.setData({
+      showModel:!this.data.showModel
+    })
+  },
+  //提交申请
+  submitBtn(){
+    this.setData({
+      showModel:!this.data.showModel,
+      isClick:!this.data.isClick
+    })
+  },
+  onPullDownRefresh(){
+    this.onLoad();
+  },
+  onShareAppMessage(){}
+})

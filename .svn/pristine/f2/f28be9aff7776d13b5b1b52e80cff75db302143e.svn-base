@@ -1,0 +1,56 @@
+.container-body{
+  position: relative;
+}
+ .bg{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  background-color:#fff; 
+}
+.bg>image{
+  width:100%;
+}
+.pre-list{
+  position: absolute;
+  top:60rpx;
+  left:5%;
+  padding:30rpx;
+  box-sizing: border-box;
+  width:90%;
+  height:100%;
+  background-color:#fff;
+  border-radius: 10rpx;
+}
+.pre-list .pre-item{
+  height:70rpx;
+  line-height: 70rpx; 
+}
+.pre-list .pre-item .left{
+  width:30%;
+}
+.pre-list .pre-item .right{
+  text-align: left;
+  width:70%;
+  border-bottom:1px solid #eee;
+  padding-left:10rpx;
+  box-sizing: border-box;
+}
+.pre-list .pre-item .right>input{
+  height:70rpx;
+  line-height: 70rpx;
+}
+.uname{
+  margin-top:30rpx;
+}
+.uname>view{
+  height:70rpx;
+  line-height: 70rpx;
+}
+.uname>view:last-child image{
+  width:50rpx;
+  height:50rpx;
+  vertical-align: middle;
+  margin-right:20rpx;
+}
